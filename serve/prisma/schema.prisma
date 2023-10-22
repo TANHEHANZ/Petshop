@@ -9,3 +9,76 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Cliente {
+  id       Int     @id @default(autoincrement())
+  nombre   String
+  apellido String
+  telefono Int
+  ci       Int
+  Venta    Venta[]
+}
+
+model Usuario {
+  id       Int    @id @default(autoincrement())
+  nombre   String
+  correo   String @unique
+  password String
+}
+
+model Producto {
+  id             Int              @id @default(autoincrement())
+  nombre         String
+  marca          String
+  precio         Float
+  cantidad       Int
+  DetalleVenta   DetalleVenta[]
+  DetallecCompra DetallecCompra[]
+}
+
+model Venta {
+  id           Int            @id @default(autoincrement())
+  clienteId    Int
+  fecha        DateTime
+  cantidad     Int
+  total        Float
+  cliente      Cliente?       @relation(fields: [clienteId], references: [id])
+  DetalleVenta DetalleVenta[]
+}
+
+model DetalleVenta {
+  id         Int       @id @default(autoincrement())
+  ventaId    Int
+  productoId Int
+  cantidad   Int
+  venta      Venta?    @relation(fields: [ventaId], references: [id])
+  producto   Producto? @relation(fields: [productoId], references: [id])
+}
+
+model Proveedor {
+  id        Int      @id @default(autoincrement())
+  nombre    String
+  telefono  Int
+  direccion String
+  Compra    Compra[]
+}
+
+model Compra {
+  id          Int        @id @default(autoincrement())
+  ProveedorId Int
+  fecha       DateTime
+  cantidad    Int
+  total       Float
+  proveedor   Proveedor? @relation(fields: [ProveedorId], references: [id])
+
+  DetallecCompra DetallecCompra[]
+}
+
+model DetallecCompra {
+  id         Int       @id @default(autoincrement())
+  compraId   Int
+  productoId Int
+  cantidad   Int
+  compra     Compra?   @relation(fields: [compraId], references: [id])
+  producto   Producto? @relation(fields: [productoId], references: [id])
+}
