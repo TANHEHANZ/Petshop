@@ -10,7 +10,7 @@ export const Content = styled.div`
     align-items: start;
     justify-content: start;
     flex-direction: column;
-    width: 30em;
+    width: 28em;
     height: 33em;
     background-color: ${colors.secundary};
     color: ${colors.white};
@@ -28,7 +28,7 @@ export const Content = styled.div`
     }
     & label {
       font-size: 0.8em;
-      width: 100%;
+      width: 90%;
       text-align: start;
       color: ${colors.tercery};
     }
