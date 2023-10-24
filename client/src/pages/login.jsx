@@ -15,7 +15,6 @@ const Login = () => {
           <input type="password" />
           <button>Ingresar</button>
         </form>
-     <div></div>
       </section>
     </Content>
   );

@@ -1,9 +1,10 @@
 import { css, keyframes } from "styled-components";
 
 export const colors = {
-  primary: "#F2F2F2",
-  secundary: "#0C2FF2",
-  tercery: "#6C7DD9",
+  primary: "#182537",
+  secundary: "#0E131D",
+  tercery: "#40B8C2",
+  white: "#D0CCC7",
 };
 export const FlexComun = css`
 display:flex;

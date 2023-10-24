@@ -1,0 +1,20 @@
+[
+  {
+    "ci": 13621632,
+    "nombre": "Mauricio",
+    "apellido": "Molina",
+    "telefono": 76407344
+  },
+  {
+    "ci": 12345678,
+    "nombre": "Josh",
+    "apellido": "Veizaga",
+    "telefono": 76412345
+  },
+  {
+    "ci": 87654321,
+    "nombre": "Hanz",
+    "apellido": "Tapia",
+    "telefono": 76454321
+  }
+]
