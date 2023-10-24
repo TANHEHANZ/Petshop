@@ -23,7 +23,7 @@ app.post("/cliente", async (req, res) => {
 app.put("/cliente/:id", async (req, res) => {
   const cliente = await prisma.cliente.update({
     where: {
-      id: Number(req.params.id),
+      ci: Number(req.params.id),
     },
     data: req.body,
   });
@@ -35,7 +35,7 @@ app.put("/cliente/:id", async (req, res) => {
 app.delete("/cliente/:id", async (req, res) => {
   const cliente = await prisma.cliente.delete({
     where: {
-      id: Number(req.params.id),
+      ci: Number(req.params.id),
     },
   });
   res.json({
@@ -46,7 +46,7 @@ app.delete("/cliente/:id", async (req, res) => {
 app.get("/cliente/:id", async (req, res) => {
   const cliente = await prisma.cliente.findUnique({
     where: {
-      id: Number(req.params.id),
+      ci: Number(req.params.id),
     },
   });
   res.json({

@@ -24,18 +24,21 @@ const Producto = () => {
     },
     {
       name: "precio",
+      type: "number",
       validations: {
         required: true
       }
     },
     {
       name: "precioCompra",
+      type: "number",
       validations: {
         required: true
       }
     },
     {
       name: "cantidad",
+      type: "number",
       validations: {
         required: true
       }
@@ -61,7 +64,7 @@ const Producto = () => {
       {
         res?.data.map(producto => (
           <div key={producto.id}>
-            {producto.id} - {producto.nombre} - {producto.precio} - { producto.cantidad }
+            {producto.id} - {producto.nombre} - {producto.precio} - {producto.precioCompra} - { producto.cantidad }
             <button onClick={() => open(producto)}>Editar</button>
             <button onClick={() => handleDelete(producto.id)}>Eliminar</button>
           </div>
