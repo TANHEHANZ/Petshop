@@ -32,16 +32,21 @@ const Form = ({ item, fields, route, onSuccess }) => {
   }
 
   const submit = async () => {
+    const body = {}
+    fields.forEach(field => {
+      body[field.name] = field.type === "number" ? Number(form[field.name]) : form[field.name]
+    });
     const res = await fetch(`http://localhost:3000${route}`, {
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
       },
       method: item ? "PUT" : "POST",
-      body: JSON.stringify(form)
+      body: JSON.stringify(body)
     });
     if(res.ok) {
       const resJson = await res.json();
+      setForm(getForm());
       onSuccess(resJson);
     }
   }

@@ -7,11 +7,12 @@ import { useGetDelete } from '../hooks/useGetDelete';
 
 const Cliente = () => {
   const { item, modalRef, open, close } = useModal();
-  const { res, handleGet, handleDelete } = useGetDelete("usuario");
+  const { res, handleGet, handleDelete } = useGetDelete("cliente");
 
   const formData = [
     {
       name: "ci",
+      type: "number",
       validations: {
         required: true
       }
@@ -30,6 +31,7 @@ const Cliente = () => {
     },
     {
       name: "telefono",
+      type: "number",
       validations: {
         required: true
       }
