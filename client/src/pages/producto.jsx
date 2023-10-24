@@ -4,7 +4,7 @@ import { useGetDelete } from '../hooks/useGetDelete';
 import productos from '../data/producto.json'
 import Modal from '../components/global/modal';
 import Form from '../components/global/form';
-import { Section } from '../style/style';
+import { Section, Table } from '../style/style';
 
 const Producto = () => {
   const { item, modalRef, open, close } = useModal();
@@ -67,15 +67,35 @@ const Producto = () => {
           }}
         />
       </Modal>
-      {
+     
+          <Table>
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>nombre</th>
+              <th>precio</th>
+              <th>precioCompra</th>
+              <th>precioCantidad</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          {
         res?.data.map(producto => (
-          <div key={producto.id}>
-            {producto.id} - {producto.nombre} - {producto.precio} - {producto.precioCompra} - { producto.cantidad }
-            <button onClick={() => open(producto)}>Editar</button>
-            <button onClick={() => handleDelete(producto.id)}>Eliminar</button>
-          </div>
+          <tr key={producto.id}>
+            <td>{producto.id}</td> 
+            <td>{producto.nombre}</td>  
+            <td>{producto.precio}</td> 
+            <td>{producto.precioCompra}</td>  
+            <td>{ producto.cantidad }</td>
+            <td><button onClick={() => open(producto)}>Editar</button>
+            <button onClick={() => handleDelete(producto.id)}>Eliminar</button></td>
+          </tr>
         ))
       }
+          </tbody>
+        </Table>
     </Section>
   )
 }

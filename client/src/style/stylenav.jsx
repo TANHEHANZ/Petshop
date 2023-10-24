@@ -5,6 +5,7 @@ export const Navbar = styled.nav`
   height:100vh;
   width: 100vw;
   justify-content: start;
+  z-index:10;
   & a:active {
     color: ${colors.primary};
   }

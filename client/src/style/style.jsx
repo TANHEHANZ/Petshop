@@ -119,3 +119,36 @@ margin:2em;
 }
 
 `;
+export const Table = styled.table`
+width:80%;
+margin:2em auto;
+border-collapse:collapse;
+& thead{
+  border:solid 1px #0005;
+height:3em;
+ 
+}
+& tr{
+    text-align:center;
+    border:solid 1px #0005;
+    font-size:.9em;
+    & th{
+      font-weight:100;
+&::first-letter{
+  text-transform:uppercase;
+}
+    }
+    & td{
+&:last-child{
+  ${FlexComun}
+  gap:1em;
+& button{
+  background-color:${colors.primary};
+  padding:.3em 1em ;
+  border:none;
+  color:${colors.white};
+}
+}
+    }
+}
+`;
