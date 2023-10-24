@@ -11,19 +11,19 @@ datasource db {
 }
 
 model Cliente {
-  id       Int     @id @default(autoincrement())
+  ci       Int     @id
   nombre   String
   apellido String
   telefono Int
-  ci       Int
   Venta    Venta[]
 }
 
 model Usuario {
-  id       Int    @id @default(autoincrement())
+  id       Int     @id @default(autoincrement())
   nombre   String
-  correo   String @unique
+  correo   String  @unique
   password String
+  estado   Boolean @default(true)
 }
 
 model Producto {
@@ -31,18 +31,18 @@ model Producto {
   nombre         String
   marca          String
   precio         Float
+  precioCompra   Float
   cantidad       Int
   DetalleVenta   DetalleVenta[]
-  DetallecCompra DetallecCompra[]
+  DetallecCompra DetalleCompra[]
 }
 
 model Venta {
   id           Int            @id @default(autoincrement())
   clienteId    Int
-  fecha        DateTime
-  cantidad     Int
+  fecha        DateTime       @default(now())
   total        Float
-  cliente      Cliente?       @relation(fields: [clienteId], references: [id])
+  cliente      Cliente?       @relation(fields: [clienteId], references: [ci])
   DetalleVenta DetalleVenta[]
 }
 
@@ -51,6 +51,7 @@ model DetalleVenta {
   ventaId    Int
   productoId Int
   cantidad   Int
+  precio     Float
   venta      Venta?    @relation(fields: [ventaId], references: [id])
   producto   Producto? @relation(fields: [productoId], references: [id])
 }
@@ -64,21 +65,20 @@ model Proveedor {
 }
 
 model Compra {
-  id          Int        @id @default(autoincrement())
-  ProveedorId Int
-  fecha       DateTime
-  cantidad    Int
-  total       Float
-  proveedor   Proveedor? @relation(fields: [ProveedorId], references: [id])
-
-  DetallecCompra DetallecCompra[]
+  id             Int              @id @default(autoincrement())
+  ProveedorId    Int
+  fecha          DateTime         @default(now())
+  total          Float
+  proveedor      Proveedor?       @relation(fields: [ProveedorId], references: [id])
+  DetallecCompra DetalleCompra[]
 }
 
-model DetallecCompra {
+model DetalleCompra {
   id         Int       @id @default(autoincrement())
   compraId   Int
   productoId Int
   cantidad   Int
+  precio     Float
   compra     Compra?   @relation(fields: [compraId], references: [id])
   producto   Producto? @relation(fields: [productoId], references: [id])
 }
