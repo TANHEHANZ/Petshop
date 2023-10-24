@@ -1,21 +1,15 @@
 import React from 'react'
 import { useModal } from '../hooks/useModal';
-import clientes from '../data/clientes.json'
+import { useGetDelete } from '../hooks/useGetDelete';
+import productos from '../data/producto.json'
 import Modal from '../components/global/modal';
 import Form from '../components/global/form';
-import { useGetDelete } from '../hooks/useGetDelete';
 
-const Cliente = () => {
+const Producto = () => {
   const { item, modalRef, open, close } = useModal();
-  const { res, handleGet, handleDelete } = useGetDelete("usuario");
+  const { res, handleGet, handleDelete } = useGetDelete("producto");
 
   const formData = [
-    {
-      name: "ci",
-      validations: {
-        required: true
-      }
-    },
     {
       name: "nombre",
       validations: {
@@ -23,13 +17,25 @@ const Cliente = () => {
       }
     },
     {
-      name: "apellido",
+      name: "marca",
       validations: {
         required: true
       }
     },
     {
-      name: "telefono",
+      name: "precio",
+      validations: {
+        required: true
+      }
+    },
+    {
+      name: "precioCompra",
+      validations: {
+        required: true
+      }
+    },
+    {
+      name: "cantidad",
       validations: {
         required: true
       }
@@ -44,7 +50,7 @@ const Cliente = () => {
           key={JSON.stringify(item)}
           item={item}
           fields={formData}
-          route={item ? `/cliente/${item.ci}` : "/cliente"}
+          route={item ? `/producto/${item.id}` : "/producto"}
           onSuccess={res => {
             alert(res.message);
             handleGet();
@@ -53,11 +59,11 @@ const Cliente = () => {
         />
       </Modal>
       {
-        res?.data.map(cliente => (
-          <div key={cliente.ci}>
-            {cliente.ci} - {cliente.nombre} - {cliente.apellido} - { cliente.telefono }
-            <button onClick={() => open(cliente)}>Editar</button>
-            <button onClick={() => handleDelete(cliente.ci)}>Eliminar</button>
+        res?.data.map(producto => (
+          <div key={producto.id}>
+            {producto.id} - {producto.nombre} - {producto.precio} - { producto.cantidad }
+            <button onClick={() => open(producto)}>Editar</button>
+            <button onClick={() => handleDelete(producto.id)}>Eliminar</button>
           </div>
         ))
       }
@@ -65,4 +71,4 @@ const Cliente = () => {
   )
 }
 
-export default Cliente
+export default Producto

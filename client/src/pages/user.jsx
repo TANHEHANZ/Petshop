@@ -1,6 +1,5 @@
 import React from 'react'
 import Form from '../components/global/form'
-import usuarios from '../data/usuarios.json'
 import { useModal } from '../hooks/useModal'
 import Modal from '../components/global/modal'
 import { useGetDelete } from '../hooks/useGetDelete'
@@ -47,7 +46,7 @@ const User = () => {
         />
       </Modal>
       {
-        usuarios.map(usuario => (
+        res?.data.map(usuario => (
           <div key={usuario.id}>
             {usuario.id} - {usuario.nombre} - {usuario.correo} - { usuario.password }
             <button onClick={() => open(usuario)}>Editar</button>
