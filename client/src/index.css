@@ -11,3 +11,17 @@
 body {
   background-color: #dbdbdb;
 }
+
+.pequeño {
+  width: 50px; 
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+}
+
+.grande {
+  max-width: 300px; 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

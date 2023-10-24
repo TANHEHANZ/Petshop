@@ -5,6 +5,9 @@ import Login from "./pages/login";
 import Cliente from "./pages/cliente";
 import Home from "./pages/home";
 import Producto from "./pages/producto";
+import Venta from "./pages/venta";
+import Proveedor from "./pages/proveedor";
+import Compra from "./pages/compra";
 
 function App() {
   return (
@@ -16,6 +19,9 @@ function App() {
           <Route path="/dashboard/user" element={<User />} />
           <Route path="/dashboard/cliente" element={<Cliente />} />
           <Route path="/dashboard/producto" element={<Producto />} />
+          <Route path="/dashboard/venta" element={<Venta />} />
+          <Route path="/dashboard/proveedor" element={<Proveedor />} />
+          <Route path="/dashboard/compra" element={<Compra />} />
         </Route>
       </Routes>
     </BrowserRouter>

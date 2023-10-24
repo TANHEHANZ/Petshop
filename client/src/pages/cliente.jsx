@@ -4,6 +4,7 @@ import clientes from '../data/clientes.json'
 import Modal from '../components/global/modal';
 import Form from '../components/global/form';
 import { useGetDelete } from '../hooks/useGetDelete';
+import { Section } from '../style/style';
 
 const Cliente = () => {
   const { item, modalRef, open, close } = useModal();
@@ -39,7 +40,13 @@ const Cliente = () => {
   ]
 
   return (
-    <div>
+    <Section>
+       <h2>Clientes</h2>
+      <article> 
+         <label >buscar <input type="text" /></label> 
+      <button onClick={() => open()}>Exportar</button>
+      <button onClick={() => open()}>Añadir</button>
+      </article>
       <button onClick={() => open()}>Añadir</button>
       <Modal ref={modalRef}>
         <Form
@@ -63,7 +70,7 @@ const Cliente = () => {
           </div>
         ))
       }
-    </div>
+    </Section>
   )
 }
 

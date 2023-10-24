@@ -3,6 +3,7 @@ import Form from '../components/global/form'
 import { useModal } from '../hooks/useModal'
 import Modal from '../components/global/modal'
 import { useGetDelete } from '../hooks/useGetDelete'
+import { Section } from '../style/style'
 
 const User = () => {
   const { item, modalRef, open, close } = useModal();
@@ -30,8 +31,13 @@ const User = () => {
   ]
 
   return (
-    <section>
-        
+    <Section>
+        <h2>Usuarios</h2>
+      <article> 
+         <label >buscar <input type="text" /></label> 
+      <button onClick={() => open()}>Exportar</button>
+      <button onClick={() => open()}>Añadir</button>
+      </article> 
       <Modal ref={modalRef}>
         <Form
           key={JSON.stringify(item)}
@@ -54,7 +60,7 @@ const User = () => {
           </div>
         ))
       }
-    </section>
+    </Section>
   )
 }
 

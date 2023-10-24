@@ -118,6 +118,7 @@ margin:2em;
  }
 }
 
+
 `;
 export const Table = styled.table`
 width:80%;
@@ -142,6 +143,7 @@ height:3em;
 &:last-child{
   ${FlexComun}
   gap:1em;
+  padding:.5em;
 & button{
   background-color:${colors.primary};
   padding:.3em 1em ;

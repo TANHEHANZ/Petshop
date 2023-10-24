@@ -67,7 +67,6 @@ const Producto = () => {
           }}
         />
       </Modal>
-     
           <Table>
           <thead>
             <tr>
@@ -83,9 +82,9 @@ const Producto = () => {
 
           {
         res?.data.map(producto => (
-          <tr key={producto.id}>
-            <td>{producto.id}</td> 
-            <td>{producto.nombre}</td>  
+          <tr  key={producto.id}>
+            <td className='pequeño'>{producto.id}</td> 
+            <td className='grande'>{producto.nombre}</td>  
             <td>{producto.precio}</td> 
             <td>{producto.precioCompra}</td>  
             <td>{ producto.cantidad }</td>
