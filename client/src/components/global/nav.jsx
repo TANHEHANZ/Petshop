@@ -1,27 +1,37 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
-import styled from "styled-components";
+import { Navbar } from "../../style/stylenav";
+
+const linksData = [
+  { to: "/dashboard/user", label: "Usuario" },
+  { to: "/dashboard/cliente", label: "Cliente" },
+  { to: "/dashboard/producto", label: "Producto" },
+  { to: "/dashboard/venta", label: "Venta" },
+  { to: "/dashboard/detalleventa", label: "DetalleVenta" },
+  { to: "/dashboard/proveedor", label: "Proveedor" },
+  { to: "/dashboard/compra", label: "Compra" },
+  { to: "/dashboard/detallecompra", label: "DetalleCompra" },
+];
 
 const Nav = () => {
+ 
+
   return (
     <Navbar>
       <ul>
-        <li><Link to="/dashboard/user">Usuario</Link></li>
-        <li><Link to="/dashboard/cliente">Cliente</Link></li>
-        <li><Link to="/dashboard/producto">Producto</Link></li>
-        <li><Link to="/dashboard/venta">Venta</Link></li>
-        <li><Link to="/dashboard/detalleventa">DetalleVenta</Link></li>
-        <li><Link to="/dashboard/proveedor">Proveedor</Link></li>
-        <li><Link to="/dashboard/compra">Compra</Link></li>
-        <li><Link to="/dashboard/detallecompra">DetalleCompra</Link></li>
+        {linksData.map((link, index) => (
+          <li key={index}>
+            <Link
+              to={link.to}
+            >
+              {link.label}
+            </Link>
+          </li>
+        ))}
       </ul>
-      <Outlet />
+      <div><Outlet /></div>
     </Navbar>
   );
 };
 
 export default Nav;
-
-const Navbar = styled.nav`
-  display: flex;
-`;

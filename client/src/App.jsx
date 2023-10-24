@@ -1,4 +1,4 @@
-import { Routes, Route, HashRouter } from "react-router-dom";
+import { Routes, Route, HashRouter, BrowserRouter } from "react-router-dom";
 import Nav from "./components/global/nav";
 import User from "./pages/user";
 import Login from "./pages/login";
@@ -8,7 +8,7 @@ import Producto from "./pages/producto";
 
 function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
       <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Nav />}>
@@ -18,7 +18,7 @@ function App() {
           <Route path="/dashboard/producto" element={<Producto />} />
         </Route>
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
