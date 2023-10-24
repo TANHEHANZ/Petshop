@@ -60,13 +60,15 @@ margin-bottom:3em ;
 flex-direction:row;
 flex-wrap:wrap;
 width:100%;
-gap:1em;
+gap:2em;
 justify-content:start;
 & div{
 width:45%;
- 
+ margin:0 auto;
 }
 & label{
+  width:100%;
+  text-align:start;
   font-size:.9em;
   &::first-letter{
     text-transform:uppercase;

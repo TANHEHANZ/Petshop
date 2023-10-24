@@ -4,6 +4,7 @@ import { useGetDelete } from '../hooks/useGetDelete';
 import productos from '../data/producto.json'
 import Modal from '../components/global/modal';
 import Form from '../components/global/form';
+import { Section } from '../style/style';
 
 const Producto = () => {
   const { item, modalRef, open, close } = useModal();
@@ -46,8 +47,13 @@ const Producto = () => {
   ]
 
   return (
-    <div>
+    <Section>
+      <h2>Productos</h2>
+      <article> 
+         <label >buscar <input type="text" /></label> 
+      <button onClick={() => open()}>Exportar</button>
       <button onClick={() => open()}>Añadir</button>
+      </article>
       <Modal ref={modalRef}>
         <Form
           key={JSON.stringify(item)}
@@ -70,7 +76,7 @@ const Producto = () => {
           </div>
         ))
       }
-    </div>
+    </Section>
   )
 }
 

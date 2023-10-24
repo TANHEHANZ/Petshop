@@ -17,7 +17,7 @@ const Nav = () => {
  
 
   return (
-    <Navbar>
+    <Navbar  >
       <ul>
         {linksData.map((link, index) => (
           <li key={index}>

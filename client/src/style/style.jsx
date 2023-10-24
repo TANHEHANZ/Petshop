@@ -80,3 +80,42 @@ export const Content = styled.div`
     background-color: #000;
   }
 `;
+
+
+
+export const Section = styled.section`
+ width:100%;
+ height:100%;
+ align-items:start;
+ flex-direction:column;
+ background-color:${colors.white};
+& > h2{
+font-size:2em;
+margin:2em;
+}
+& > article{
+  ${FlexComun}
+  justify-content:start;
+  gap:1em;
+  padding:2em;
+  box-shadow:0px 5px 10px -5px #000;
+  margin:0;
+ & input{
+  width:30em;
+  background-color:transparent;
+  border:none;
+  border-bottom: solid 1px #0005;
+  padding:.5em ;
+  outline:none;
+ }
+ & button{
+  padding:.5em 2em;
+  background-color:${colors.secundary};
+  color:${colors.white};
+  border:none;
+  border-radius:.8em;
+  cursor: pointer;
+ }
+}
+
+`;

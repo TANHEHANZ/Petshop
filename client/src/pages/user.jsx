@@ -30,8 +30,8 @@ const User = () => {
   ]
 
   return (
-    <div>
-      <button onClick={() => open()}>Añadir</button>
+    <section>
+        
       <Modal ref={modalRef}>
         <Form
           key={JSON.stringify(item)}
@@ -54,7 +54,7 @@ const User = () => {
           </div>
         ))
       }
-    </div>
+    </section>
   )
 }
 

@@ -47,4 +47,12 @@ export const Navbar = styled.nav`
       border-radius: 50%;
     }
   }
+  & > div{
+  ${FlexComun}
+  flex-direction:column;
+    height:100vh;
+    width:calc(100vw - 250px);
+    /* padding:2em; */
+    
+  }
 `;
