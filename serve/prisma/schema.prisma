@@ -11,11 +11,12 @@ datasource db {
 }
 
 model Cliente {
-  ci       Int     @id
-  nombre   String
-  apellido String
-  telefono Int
-  Venta    Venta[]
+  ci        Int     @id
+  nombre    String
+  apellido  String
+  telefono  Int
+  direccion String
+  Venta     Venta[]
 }
 
 model Usuario {
@@ -26,24 +27,44 @@ model Usuario {
   estado   Boolean @default(true)
 }
 
+model Categoria {
+  id       Int        @id @default(autoincrement())
+  nombre   String
+  Producto Producto[]
+}
+
+model Marca {
+  id       Int        @id @default(autoincrement())
+  nombre   String
+  Producto Producto[]
+}
+
 model Producto {
-  id             Int              @id @default(autoincrement())
+  id             Int             @id @default(autoincrement())
   nombre         String
-  marca          String
-  precio         Float
-  precioCompra   Float
+  descripcion    String
+  categoriaId    Int
+  marcaId        Int
   cantidad       Int
+  precio         Float
+  unidadmedida   String
+  precioCompra   Float
+  marca          Marca           @relation(fields: [marcaId], references: [id])
+  categoria      Categoria       @relation(fields: [categoriaId], references: [id])
   DetalleVenta   DetalleVenta[]
   DetallecCompra DetalleCompra[]
 }
 
 model Venta {
-  id           Int            @id @default(autoincrement())
-  clienteId    Int
-  fecha        DateTime       @default(now())
-  total        Float
-  cliente      Cliente?       @relation(fields: [clienteId], references: [ci])
-  DetalleVenta DetalleVenta[]
+  id                    Int            @id @default(autoincrement())
+  tipoPago              String
+  descuento             Float
+  inpuestoGeneradoVenta Float
+  clienteId             Int
+  fecha                 DateTime       @default(now())
+  total                 Float
+  cliente               Cliente?       @relation(fields: [clienteId], references: [ci])
+  DetalleVenta          DetalleVenta[]
 }
 
 model DetalleVenta {
@@ -57,19 +78,22 @@ model DetalleVenta {
 }
 
 model Proveedor {
-  id        Int      @id @default(autoincrement())
-  nombre    String
-  telefono  Int
-  direccion String
-  Compra    Compra[]
+  id            Int      @id @default(autoincrement())
+  razonSocial   String
+  telefono      Int
+  direccion     String
+  gmail         String
+  representante String
+  ciudad        String
+  Compra        Compra[]
 }
 
 model Compra {
-  id             Int              @id @default(autoincrement())
+  id             Int             @id @default(autoincrement())
   ProveedorId    Int
-  fecha          DateTime         @default(now())
+  fecha          DateTime        @default(now())
   total          Float
-  proveedor      Proveedor?       @relation(fields: [ProveedorId], references: [id])
+  proveedor      Proveedor?      @relation(fields: [ProveedorId], references: [id])
   DetallecCompra DetalleCompra[]
 }
 

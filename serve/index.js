@@ -10,7 +10,8 @@ import cliente from './controllers/cliente.js';
 import producto from './controllers/producto.js';
 import proveedor from './controllers/proveedor.js';
 import venta from './controllers/venta.js';
-
+import categoria from './controllers/categoria.js';
+import marca from "./controllers/marca.js";
 const app = express();
 const port = 3000;
 import bodyParser from "body-parser"
@@ -20,7 +21,8 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 app.use(cors());
-
+app.use(categoria);
+app.use(marca);
 app.use(usuario);
 app.use(cliente);
 app.use(compra);

@@ -1,10 +1,11 @@
 import React from 'react'
+import { Section } from '../style/style';
 
 const Home = () => {
   return (
-    <div>
-      
-    </div>
+    <Section>
+      data 
+    </Section>
   )
 }
 

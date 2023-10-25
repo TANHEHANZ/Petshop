@@ -156,6 +156,7 @@ height:3em;
 `;
 
 
+<<<<<<< HEAD
 
 export const Filtros = styled.section`
 width:220px;
@@ -187,3 +188,10 @@ opacity:1;
 }
 
 `;
+=======
+export const VentaStyle = styled.section`
+
+
+`;
+
+>>>>>>> c49187bbdece8e580c1b7bc2705add50dab80e29
