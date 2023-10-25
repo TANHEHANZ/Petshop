@@ -11,7 +11,7 @@ import Compra from "./pages/compra";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
       <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Nav />}>
@@ -24,7 +24,7 @@ function App() {
           <Route path="/dashboard/compra" element={<Compra />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

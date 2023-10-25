@@ -154,3 +154,10 @@ height:3em;
     }
 }
 `;
+
+
+export const VentaStyle = styled.section`
+
+
+`;
+
