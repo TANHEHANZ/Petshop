@@ -7,10 +7,8 @@ const linksData = [
   { to: "/dashboard/cliente", label: "Cliente" },
   { to: "/dashboard/producto", label: "Producto" },
   { to: "/dashboard/venta", label: "Venta" },
-  { to: "/dashboard/detalleventa", label: "DetalleVenta" },
   { to: "/dashboard/proveedor", label: "Proveedor" },
   { to: "/dashboard/compra", label: "Compra" },
-  { to: "/dashboard/detallecompra", label: "DetalleCompra" },
 ];
 
 const Nav = () => {
