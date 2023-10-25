@@ -21,7 +21,7 @@ const Venta = () => {
               <th>DetalleVenta</th>
             </tr>
           </thead>
-          <tbody>
+        
           {/* <ul>
         {data.map((venta) => (
           <li key={venta.id}>
@@ -41,17 +41,19 @@ const Venta = () => {
             </li>
         ))} */}
         <tbody>
-        data.map(producto => (
+       {
+         data.map(producto => (
           <tr  key={producto.id}>
             <td className='pequeño'>{producto.id}</td> 
-            <td className='grande'>{producto.nombre}</td>  
-            <td>{producto.precio}</td> 
-            <td>{producto.precioCompra}</td>  
-            <td>{ producto.cantidad }</td>
+            <td className='grande'>{producto.cliente}</td>  
+            <td>{producto.fecha}</td> 
+            <td>{producto.total}</td>  
+            <td>{ producto.detalle }</td>
             <td><button onClick={() => open(producto)}>Editar</button>
             <button onClick={() => handleDelete(producto.id)}>Eliminar</button></td>
           </tr>
         ))
+       }
       
           </tbody>
         </Table>
