@@ -154,3 +154,36 @@ height:3em;
     }
 }
 `;
+
+
+
+export const Filtros = styled.section`
+width:220px;
+height:14em;
+position:fixed;
+right:-80px;
+top:25%;
+background-color:${colors.primary};
+color:${colors.white};
+display:flex;
+flex-direction:column;
+align-items:start;
+justify-content:start;
+padding:1em;
+transition:all 1s ease-in-out;
+border-radius:.5em;
+opacity:.7;
+& h2{
+  margin:1em .5em;
+}
+& label{
+  & input{
+    margin:1em ;
+  }
+}
+&:hover,:active{
+  right:-1em;
+opacity:1;
+}
+
+`;
