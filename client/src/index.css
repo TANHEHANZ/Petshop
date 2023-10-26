@@ -19,7 +19,7 @@ body {
   text-overflow: ellipsis; 
   transition: max-width 1s ease-in-out;
 }
-.pequeño:hover{
+.pequeño:active{
   max-width: 100%; 
 }
 
@@ -30,13 +30,13 @@ body {
   text-overflow: ellipsis;
 }
 ::-webkit-scrollbar {
-  width: 8px; /* Ancho de la barra de desplazamiento vertical */
-  height: 12px; /* Altura de la barra de desplazamiento horizontal */
+  width: 8px; 
+  height: 12px; 
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888; /* Color del pulgar de la barra de desplazamiento */
-  border-radius: 6px; /* Radio de borde del pulgar */
+  background: #888; 
+  border-radius: 6px; 
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -44,13 +44,13 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Color de la pista de la barra de desplazamiento */
+  background: #f1f1f1;
 }
 
 ::-webkit-scrollbar-track:hover {
-  background: #ddd; /* Color de la pista al pasar el mouse */
+  background: #ddd; 
 }
 
 ::-webkit-scrollbar-button {
-  display: none; /* Ocultar los botones de la barra de desplazamiento */
+  display: none;
 }
