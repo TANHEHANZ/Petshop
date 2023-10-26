@@ -60,7 +60,8 @@ const Cliente = () => {
           }}
         />
       </Modal>
-       <Table>
+   <div>
+   <Table>
         <thead>
           <tr>
             <th>Ci</th>
@@ -86,6 +87,7 @@ const Cliente = () => {
           ))}
         </tbody>
       </Table>
+   </div>
     </Section>
   )
 }

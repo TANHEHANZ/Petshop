@@ -11,7 +11,8 @@ const Venta = () => {
       <button onClick={() => open()}>Exportar</button>
       <button onClick={() => open()}>Añadir</button>
       </article>
-      <Table>
+     <div>
+     <Table>
           <thead>
             <tr>
               <th>id</th>
@@ -58,6 +59,7 @@ const Venta = () => {
       
           </tbody>
         </Table>
+     </div>
      <FilterVentas/>
     </Section>
   );

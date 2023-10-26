@@ -53,7 +53,8 @@ const User = () => {
           }}
         />
       </Modal>
-      <Table>
+    <div>
+    <Table>
         <thead>
           <tr>
             <th>id</th>
@@ -80,6 +81,7 @@ const User = () => {
           ))}
         </tbody>
       </Table>
+    </div>
     </Section>
   );
 };

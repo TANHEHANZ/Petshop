@@ -81,6 +81,7 @@ const Producto = () => {
           }}
         />
       </Modal>
+      <div>
       <Table>
         <thead>
           <tr>
@@ -112,6 +113,7 @@ const Producto = () => {
           ))}
         </tbody>
       </Table>
+      </div>
     </Section>
   );
 };
