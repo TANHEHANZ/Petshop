@@ -4,7 +4,7 @@ import clientes from '../data/clientes.json'
 import Modal from '../components/global/modal';
 import Form from '../components/global/form';
 import { useGetDelete } from '../hooks/useGetDelete';
-import { Section } from '../style/style';
+import { Section, Table } from '../style/style';
 
 const Cliente = () => {
   const { item, modalRef, open, close } = useModal();
@@ -47,7 +47,6 @@ const Cliente = () => {
       <button onClick={() => open()}>Exportar</button>
       <button onClick={() => open()}>Añadir</button>
       </article>
-      <button onClick={() => open()}>Añadir</button>
       <Modal ref={modalRef}>
         <Form
           key={JSON.stringify(item)}
@@ -61,15 +60,32 @@ const Cliente = () => {
           }}
         />
       </Modal>
-      {
-        res?.data.map(cliente => (
-          <div key={cliente.ci}>
-            {cliente.ci} - {cliente.nombre} - {cliente.apellido} - { cliente.telefono }
-            <button onClick={() => open(cliente)}>Editar</button>
+       <Table>
+        <thead>
+          <tr>
+            <th>Ci</th>
+            <th>nombre</th>
+            <th>apellido</th>
+            <th>telefono</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {res?.data.map((cliente) => (
+            <tr key={cliente.id}>
+              <td className="pequeño">{cliente.id}</td>
+              <td className="grande">{cliente.nombre}</td>
+              <td className="grande">{cliente.apellido}</td>
+              <td className="grande">{cliente.telefono}</td>
+              <td>
+              <button onClick={() => open(cliente)}>Editar</button>
             <button onClick={() => handleDelete(cliente.ci)}>Eliminar</button>
-          </div>
-        ))
-      }
+               
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
     </Section>
   )
 }

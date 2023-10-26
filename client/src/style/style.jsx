@@ -39,7 +39,7 @@ export const Content = styled.div`
       border-bottom: solid 1px ${colors.white};
       padding: 1em;
       outline: none;
-      color:${colors.tercery};
+      color: ${colors.tercery};
     }
     & > input:focus {
       border-bottom: solid 1px ${colors.tercery};
@@ -81,109 +81,109 @@ export const Content = styled.div`
   }
 `;
 
-
-
 export const Section = styled.section`
- width:100%;
- height:100%;
- align-items:start;
- flex-direction:column;
- background-color:${colors.white};
-& > h2{
-font-size:2em;
-margin:2em;
-}
-& > article{
-  ${FlexComun}
-  justify-content:start;
-  gap:1em;
-  padding:2em;
-  box-shadow:0px 5px 10px -5px #000;
-  margin:0;
- & input{
-  width:30em;
-  background-color:transparent;
-  border:none;
-  border-bottom: solid 1px #0005;
-  padding:.5em ;
-  outline:none;
- }
- & button{
-  padding:.5em 2em;
-  background-color:${colors.secundary};
-  color:${colors.white};
-  border:none;
-  border-radius:.8em;
-  cursor: pointer;
- }
-}
-
-
+  width: 100%;
+  height: 100%;
+  align-items: start;
+  flex-direction: column;
+  background-color: ${colors.white};
+  & > div {
+    width: 80vw;
+    height: 50vh;
+    overflow-y: scroll;
+    margin: 2em auto;
+    padding:1em;
+  }
+  & > h2 {
+    font-size: 2em;
+    margin: 2em;
+  }
+  & > article {
+    ${FlexComun}
+    justify-content:start;
+    gap: 1em;
+    padding: 2em;
+    box-shadow: 0px 5px 10px -5px #000;
+    margin: 0;
+    & input {
+      width: 30em;
+      background-color: transparent;
+      border: none;
+      border-bottom: solid 1px #0005;
+      padding: 0.5em;
+      outline: none;
+    }
+    & button {
+      padding: 0.5em 2em;
+      background-color: ${colors.secundary};
+      color: ${colors.white};
+      border: none;
+      border-radius: 0.8em;
+      cursor: pointer;
+    }
+  }
 `;
 export const Table = styled.table`
-width:80%;
-margin:2em auto;
-border-collapse:collapse;
-& thead{
-  border:solid 1px #0005;
-height:3em;
- 
-}
-& tr{
-    text-align:center;
-    border:solid 1px #0005;
-    font-size:.9em;
-    & th{
-      font-weight:100;
-&::first-letter{
-  text-transform:uppercase;
-}
+  width: 100%;
+  margin: 0em auto;
+  border-collapse: collapse;
+  & thead {
+    border: solid 1px #0005;
+    height: 3em;
+  }
+  & tr {
+    text-align: center;
+    border: solid 1px #0005;
+    font-size: 0.8em;
+    & th {
+      font-weight: 100;
+      &::first-letter {
+        text-transform: uppercase;
+      }
     }
-    & td{
-&:last-child{
-  ${FlexComun}
-  gap:1em;
-  padding:.5em;
-& button{
-  background-color:${colors.primary};
-  padding:.3em 1em ;
-  border:none;
-  color:${colors.white};
-}
-}
+    & td {
+      &:last-child {
+        ${FlexComun}
+        gap:1em;
+        padding: 0.5em;
+        & button {
+          background-color: ${colors.primary};
+          padding: 0.3em 1em;
+          border: none;
+          color: ${colors.white};
+        }
+      }
     }
-}
+  }
 `;
 
-
-
 export const Filtros = styled.section`
-width:220px;
-height:14em;
-position:fixed;
-right:-80px;
-top:25%;
-background-color:${colors.primary};
-color:${colors.white};
-display:flex;
-flex-direction:column;
-align-items:start;
-justify-content:start;
-padding:1em;
-transition:all 1s ease-in-out;
-border-radius:.5em;
-opacity:.7;
-& h2{
-  margin:1em .5em;
-}
-& label{
-  & input{
-    margin:1em ;
+  width: 220px;
+  height: 14em;
+  position: fixed;
+  right: -80px;
+  top: 25%;
+  background-color: ${colors.primary};
+  color: ${colors.white};
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  padding: 1em;
+  transition: all 1s ease-in-out;
+  border-radius: 0.5em;
+  opacity: 0.7;
+  & h2 {
+    margin: 1em 0.5em;
   }
-}
-&:hover,:active{
-  right:-1em;
-opacity:1;
-}
-
+  & label {
+    & input {
+      margin: 1em;
+    }
+  }
+  &:hover,
+  :active {
+    right: -1em;
+    opacity: 1;
+  }
 `;

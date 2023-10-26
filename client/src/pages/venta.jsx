@@ -19,6 +19,7 @@ const Venta = () => {
               <th>fecha</th>
               <th>total</th>
               <th>DetalleVenta</th>
+              <th>acciones</th>
             </tr>
           </thead>
         

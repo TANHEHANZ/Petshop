@@ -13,15 +13,44 @@ body {
 }
 
 .pequeño {
-  width: 50px; 
+  max-width: 50px; 
   white-space: nowrap; 
   overflow: hidden; 
   text-overflow: ellipsis; 
+  transition: max-width 1s ease-in-out;
+}
+.pequeño:hover{
+  max-width: 100%; 
 }
 
 .grande {
-  max-width: 300px; 
+  max-width: 200px; 
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+::-webkit-scrollbar {
+  width: 8px; /* Ancho de la barra de desplazamiento vertical */
+  height: 12px; /* Altura de la barra de desplazamiento horizontal */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; /* Color del pulgar de la barra de desplazamiento */
+  border-radius: 6px; /* Radio de borde del pulgar */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #182537; 
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color de la pista de la barra de desplazamiento */
+}
+
+::-webkit-scrollbar-track:hover {
+  background: #ddd; /* Color de la pista al pasar el mouse */
+}
+
+::-webkit-scrollbar-button {
+  display: none; /* Ocultar los botones de la barra de desplazamiento */
 }
