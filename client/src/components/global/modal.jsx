@@ -7,7 +7,7 @@ const Modal = forwardRef(({ children }, modalRef) => {
     modalRef.current.close();
   }
 
-  useEffect(() => {
+  /* useEffect(() => {
     if(modalRef.current) {
       modalRef.current.addEventListener("click", e => {
         const dialogDimensions = modalRef.current.getBoundingClientRect()
@@ -21,7 +21,7 @@ const Modal = forwardRef(({ children }, modalRef) => {
         }
       })
     }
-  }, [modalRef])
+  }, [modalRef]) */
 
   return (
     <Dialog ref={modalRef}>
