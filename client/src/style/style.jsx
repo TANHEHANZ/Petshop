@@ -100,7 +100,7 @@ export const Section = styled.section`
   }
   & > article {
     ${FlexComun}
-    justify-content:start;
+    justify-content:space-evenly;
     gap: 1em;
     padding: 2em;
     box-shadow: 0px 5px 10px -5px #000;

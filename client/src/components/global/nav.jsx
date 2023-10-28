@@ -3,7 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 import { Navbar } from "../../style/stylenav";
 
 const linksData = [
-  { to: "/dashboard/user", label: "Usuario" },
+  { to: "/dashboard/usuario", label: "Usuario" },
   { to: "/dashboard/cliente", label: "Cliente" },
   { to: "/dashboard/producto", label: "Producto" },
   { to: "/dashboard/venta", label: "Venta" },

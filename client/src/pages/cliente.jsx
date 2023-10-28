@@ -36,6 +36,12 @@ const Cliente = () => {
       validations: {
         required: true
       }
+    },
+    {
+      name: "direccion",
+      validations: {
+        required: true
+      }
     }
   ]
 
@@ -43,7 +49,7 @@ const Cliente = () => {
     <Section>
        <h2>Clientes</h2>
       <article> 
-         <label >buscar <input type="text" /></label> 
+         <label >Buscar <input type="text" /></label> 
       <button onClick={() => open()}>Exportar</button>
       <button onClick={() => open()}>Añadir</button>
       </article>
@@ -65,23 +71,24 @@ const Cliente = () => {
         <thead>
           <tr>
             <th>Ci</th>
-            <th>nombre</th>
-            <th>apellido</th>
-            <th>telefono</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Telefono</th>
+            <th>Direccion</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
           {res?.data.map((cliente) => (
             <tr key={cliente.id}>
-              <td className="pequeño">{cliente.id}</td>
+              <td className="pequeño">{cliente.ci}</td>
               <td className="grande">{cliente.nombre}</td>
               <td className="grande">{cliente.apellido}</td>
               <td className="grande">{cliente.telefono}</td>
+              <td className='grande'>{cliente.direccion}</td>
               <td>
               <button onClick={() => open(cliente)}>Editar</button>
             <button onClick={() => handleDelete(cliente.ci)}>Eliminar</button>
-               
               </td>
             </tr>
           ))}

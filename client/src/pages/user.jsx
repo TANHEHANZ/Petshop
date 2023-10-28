@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Form from "../components/global/form";
 import { useModal } from "../hooks/useModal";
 import Modal from "../components/global/modal";
@@ -8,7 +8,6 @@ import { Section, Table } from "../style/style";
 const User = () => {
   const { item, modalRef, open, close } = useModal();
   const { res, handleGet, handleDelete } = useGetDelete("usuario");
-
   const formData = [
     {
       name: "nombre",
@@ -35,9 +34,9 @@ const User = () => {
       <h2>Usuarios</h2>
       <article>
         <label>
-          buscar <input type="text" />
+          Buscar <input type="text" />
         </label>
-        <button onClick={() => open()}>Exportar</button>
+      
         <button onClick={() => open()}>Añadir</button>
       </article>
       <Modal ref={modalRef}>
@@ -57,10 +56,11 @@ const User = () => {
     <Table>
         <thead>
           <tr>
-            <th>id</th>
+            <th>Nro</th>
             <th>nombre</th>
             <th>Correo</th>
             <th>Password</th>
+            <th>Estado</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -71,6 +71,7 @@ const User = () => {
               <td className="grande">{usuario.nombre}</td>
               <td className="grande">{usuario.correo}</td>
               <td>{usuario.password}</td>
+              <td><input type="checkbox" /></td>
               <td>
                 <button onClick={() => open(usuario)}>Editar</button>
                 <button onClick={() => handleDelete(usuario.id)}>
