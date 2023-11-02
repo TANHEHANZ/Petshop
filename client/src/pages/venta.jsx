@@ -8,6 +8,8 @@ import Form from "../components/global/form";
 import styled from "styled-components";
 import { useGetDelete } from "../hooks/useGetDelete";
 import Datalist from "../components/global/datalist";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 const Venta = () => {
   const { open, close, modalRef } = useModal();
   const { res: clienteRes } = useGetDelete("cliente");
@@ -18,16 +20,20 @@ const Venta = () => {
       name: "tipoPago",
       type: "select",
       default: "efectivo",
-      options: [{
-        name: "Efectivo",
-        value: "efectivo"
-      },{
-        name: "QR",
-        value: "qr"
-      }, {
-        name: "Crédito",
-        value: "credito"
-      }],
+      options: [
+        {
+          name: "Efectivo",
+          value: "efectivo",
+        },
+        {
+          name: "QR",
+          value: "qr",
+        },
+        {
+          name: "Crédito",
+          value: "credito",
+        },
+      ],
       optionDisplayName: "name",
       optionValue: "value",
       validations: {
@@ -56,30 +62,36 @@ const Venta = () => {
   ]);
 
   useEffect(() => {
-    if(clienteRes) {
-      setFormData(() => formData.map(field => {
-        if(field.name === "cliente") {
-          field.options = clienteRes.data
-        }
-        return field;
-      }))
+    if (clienteRes) {
+      setFormData(() =>
+        formData.map((field) => {
+          if (field.name === "cliente") {
+            field.options = clienteRes.data;
+          }
+          return field;
+        })
+      );
     }
-  }, [clienteRes])
+  }, [clienteRes]);
 
   return (
     <Section>
       <h2>Venta</h2>
-      <article> 
-        <label >buscar <input type="text" /></label> 
-        <button onClick={() => {}}>Exportar</button>
-        <button onClick={() => open()}>Añadir</button>
+      <article>
+        <label>
+          buscar <input type="text" />
+        </label>
+        <div>
+          <button onClick={() => open()}>Exportar</button>
+          <button onClick={() => open()}>Añadir</button>
+        </div>
       </article>
-      <Modal ref={modalRef} >
+      <Modal ref={modalRef}>
         <Separator>
           <Form
             fields={formData}
             route={"/venta"}
-            onSuccess={res => {
+            onSuccess={(res) => {
               alert(res.message);
             }}
           />
@@ -102,7 +114,7 @@ const Venta = () => {
         </Separator>
       </Modal>
       <div>
-      <Table>
+        <Table>
           <thead>
             <tr>
               <th>id</th>
@@ -113,7 +125,7 @@ const Venta = () => {
               <th>acciones</th>
             </tr>
           </thead>
-        
+
           {/* <ul>
         {data.map((venta) => (
           <li key={venta.id}>
@@ -132,25 +144,38 @@ const Venta = () => {
             </ul>
             </li>
         ))} */}
-        <tbody>
-       {
-         data.map(producto => (
-          <tr  key={producto.id}>
-            <td className='pequeño'>{producto.id}</td> 
-            <td className='grande'>{producto.cliente}</td>  
-            <td>{producto.fecha}</td> 
-            <td>{producto.total}</td>  
-            <td>{ producto.detalle }</td>
-            <td><button onClick={() => open(producto)}>Editar</button>
-            <button onClick={() => handleDelete(producto.id)}>Eliminar</button></td>
-          </tr>
-        ))
-       }
-      
+          <tbody>
+            {data.map((producto) => (
+              <tr key={producto.id}>
+                <td className="pequeño">{producto.id}</td>
+                <td className="grande">{producto.cliente}</td>
+                <td>{producto.fecha}</td>
+                <td>{producto.total}</td>
+                <td>{producto.detalle}</td>
+
+                <td>
+                  <button onClick={() => open(producto)}>
+                    <FontAwesomeIcon
+                      icon={faPencil}
+                      bounce
+                      style={{ color: "green" }}
+                    />
+                  </button>
+                  <button onClick={() => handleDelete(producto.ci)}>
+                    <FontAwesomeIcon
+                      icon={faTrash}
+                      bounce
+                      style={{ color: "#7c281a" }}
+                    />{" "}
+                  </button>
+                </td>
+               
+              </tr>
+            ))}
           </tbody>
         </Table>
-     </div>
-     <FilterVentas/>
+      </div>
+      <FilterVentas />
     </Section>
   );
 };

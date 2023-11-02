@@ -13,12 +13,12 @@ body {
 }
 
 .pequeño {
-  max-width: 50px; 
+  max-width: 60px; 
   white-space: nowrap; 
   overflow: hidden; 
   text-overflow: ellipsis; 
-  transition: max-width 1s ease-in-out;
-}
+  transition: max-width 1s ease-in-out;}
+
 .pequeño:active{
   max-width: 100%; 
 }
@@ -37,6 +37,7 @@ body {
 ::-webkit-scrollbar-thumb {
   background: #888; 
   border-radius: 6px; 
+  color: #035aa66c;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -53,4 +54,18 @@ body {
 
 ::-webkit-scrollbar-button {
   display: none;
+}
+.slide-in-icon {
+  animation: slideIn 1s forwards;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }

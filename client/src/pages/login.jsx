@@ -6,7 +6,7 @@ const Login = () => {
     <Content>
       <section>
         <form>
-          <h1>Inicio de Sencion</h1>
+          <h1>Inicio de Secion</h1>
           <label>Usuario</label>
           <input type="text" />
           <label>Contraseña</label>

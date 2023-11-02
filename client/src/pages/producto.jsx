@@ -91,8 +91,10 @@ const Producto = () => {
         <label>
           buscar <input type="text" />
         </label>
-        <button onClick={() => open()}>Exportar</button>
+       <div>
+       <button onClick={() => open()}>Exportar</button>
         <button onClick={() => open()}>Añadir</button>
+       </div>
       </article>
       <input type="text" placeholder="Agregar categoria" value={categoria} onChange={(e) => handleCategoria(e.target.value)} />
       <Modal ref={modalRef}>

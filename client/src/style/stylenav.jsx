@@ -6,38 +6,44 @@ export const Navbar = styled.nav`
   width: 100vw;
   justify-content: start;
   z-index:10;
+
   & a:active {
     color: ${colors.primary};
   }
   & a {
     text-decoration: none;
-    padding: 0.7em 3em;
+    padding: 0.7em 1em;
     display: block;
     color: ${colors.white};
     width: 200px;
     font-size: 0.9em;
   }
+  & svg{
+    margin:0 1em;
+  }
   & > ul {
     width: 250px;
-    background-color: ${colors.primary};
+    background-color: #3068D9;
     height: 100vh;
     ${FlexComun}
     flex-direction:column;
     align-items: start;
     padding-left: 2em;
     box-shadow: 0 5px 10px #000;
+    gap:.5em;
   }
   & li {
     list-style: none;
     position: relative;
-    &::after {
+    
+    /* &::after {
       ${PositcionComun}
       width:8px;
       height: 8px;
       border-radius: 50% ;
       background: ${colors.white};
       left: 0.2em;
-      bottom: 0.8em;
+      bottom: 1em;
     }
     &::before {
       ${PositcionComun}
@@ -46,7 +52,7 @@ export const Navbar = styled.nav`
       background: ${colors.white};
       left: 0.4em;
       border-radius: 50%;
-    }
+    } */
   }
   & > div{
   ${FlexComun}
@@ -54,6 +60,6 @@ export const Navbar = styled.nav`
     height:100vh;
     width:calc(100vw - 250px);
     /* padding:2em; */
-    
+    box-shadow:0 5px 10px #0005;
   }
 `;

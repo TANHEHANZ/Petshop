@@ -4,7 +4,8 @@ import { useModal } from "../hooks/useModal";
 import Modal from "../components/global/modal";
 import { useGetDelete } from "../hooks/useGetDelete";
 import { Section, Table } from "../style/style";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faTrash, faPencil } from "@fortawesome/free-solid-svg-icons";
 const User = () => {
   const { item, modalRef, open, close } = useModal();
   const { res, handleGet, handleDelete } = useGetDelete("usuario");
@@ -36,7 +37,7 @@ const User = () => {
         <label>
           Buscar <input type="text" />
         </label>
-      
+
         <button onClick={() => open()}>Añadir</button>
       </article>
       <Modal ref={modalRef}>
@@ -52,37 +53,42 @@ const User = () => {
           }}
         />
       </Modal>
-    <div>
-    <Table>
-        <thead>
-          <tr>
-            <th>Nro</th>
-            <th>nombre</th>
-            <th>Correo</th>
-            <th>Password</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {res?.data.map((usuario) => (
-            <tr key={usuario.id}>
-              <td className="pequeño">{usuario.id}</td>
-              <td className="grande">{usuario.nombre}</td>
-              <td className="grande">{usuario.correo}</td>
-              <td>{usuario.password}</td>
-              <td><input type="checkbox" /></td>
-              <td>
-                <button onClick={() => open(usuario)}>Editar</button>
-                <button onClick={() => handleDelete(usuario.id)}>
-                  Eliminar
-                </button>
-              </td>
+      <div>
+        <Table>
+          <thead>
+            <tr>
+              <th>Nro</th>
+              <th>nombre</th>
+              <th>Correo</th>
+              <th>Password</th>
+              <th>Estado</th>
+              <th>Acciones</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
-    </div>
+          </thead>
+          <tbody>
+            {res?.data.map((usuario) => (
+              <tr key={usuario.id}>
+                <td className="pequeño">{usuario.id}</td>
+                <td className="grande">{usuario.nombre}</td>
+                <td className="grande">{usuario.correo}</td>
+                <td>{usuario.password}</td>
+                <td>
+                  <input type="checkbox" />
+                </td>
+                <td>
+                  <button onClick={() => open(usuario)}>
+    
+                    <FontAwesomeIcon icon={faPencil} bounce/>
+                  </button>
+                  <button onClick={() => handleDelete(usuario.id)} style={{color:"#7c281a"}}>
+                    <FontAwesomeIcon icon={faTrash} bounce/>
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
     </Section>
   );
 };
