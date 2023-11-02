@@ -11,10 +11,21 @@ import Compra from "./pages/compra";
 import DetalleProducto from "./pages/detalleProducto";
 import Categoria from "./pages/categoria";
 import Marca from "./pages/marca";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <HashRouter>
+      <ToastContainer position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light" />
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Nav />}>

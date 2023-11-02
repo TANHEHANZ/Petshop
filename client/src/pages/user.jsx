@@ -4,6 +4,7 @@ import { useModal } from "../hooks/useModal";
 import Modal from "../components/global/modal";
 import { useGetDelete } from "../hooks/useGetDelete";
 import { Section, Table } from "../style/style";
+import { toast } from "react-toastify";
 
 const User = () => {
   const { item, modalRef, open, close } = useModal();
@@ -46,7 +47,7 @@ const User = () => {
           fields={formData}
           route={item ? `/usuario/${item.id}` : "/usuario"}
           onSuccess={(res) => {
-            alert(res.message);
+            toast.success(res.message);
             handleGet();
             close();
           }}

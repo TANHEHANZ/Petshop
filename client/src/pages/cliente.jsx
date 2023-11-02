@@ -1,10 +1,10 @@
 import React from 'react'
 import { useModal } from '../hooks/useModal';
-import clientes from '../data/clientes.json'
 import Modal from '../components/global/modal';
 import Form from '../components/global/form';
 import { useGetDelete } from '../hooks/useGetDelete';
 import { Section, Table } from '../style/style';
+import { toast } from 'react-toastify';
 
 const Cliente = () => {
   const { item, modalRef, open, close } = useModal();
@@ -60,7 +60,7 @@ const Cliente = () => {
           fields={formData}
           route={item ? `/cliente/${item.ci}` : "/cliente"}
           onSuccess={res => {
-            alert(res.message);
+            toast.success(res.message);
             handleGet();
             close();
           }}
