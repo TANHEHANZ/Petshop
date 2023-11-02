@@ -67,7 +67,6 @@ const Cliente = () => {
             />
           </button>
           <button onClick={() => open()}>
-            {" "}
             <FontAwesomeIcon icon={faPlus} style={{ color: "#fff" }} />
           </button>
         </div>

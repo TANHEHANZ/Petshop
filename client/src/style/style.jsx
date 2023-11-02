@@ -88,8 +88,9 @@ export const Section = styled.section`
   align-items: start;
   flex-direction: column;
   background-color: ${colors.white};
+ 
   & > div {
-    width: 80vw;
+    width: 75vw;
     height: 50vh;
     overflow-y: scroll;
     margin: 2em auto;
@@ -118,6 +119,8 @@ export const Section = styled.section`
       display: flex;
       flex-direction: column;
       z-index: 20;
+      width: 100%;
+
       &::first-letter {
         text-transform: uppercase;
       }
@@ -127,7 +130,7 @@ export const Section = styled.section`
       border: solid 1px #0005;
       padding: 0.5em;
       outline: none;
-      width: 45em;
+      width: 100%;
       position: absolute;
       bottom: -23px;
       left: -10px;
@@ -139,6 +142,42 @@ export const Section = styled.section`
       border: none;
       border-radius: 0.8em;
       cursor: pointer;
+    }
+  }
+  @media screen and (max-width: 1080px) {
+    & article{
+      flex-direction:column;
+      height: 20%;
+      & label{
+        width: 40em;
+        & input{
+          width: 30em;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 768px) {
+    & article{
+      flex-direction:column;
+      height: 20%;
+      & label{
+        width: 40em;
+        & input{
+          width: 30em;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 550px) {
+    & article{
+      flex-direction:column;
+      height: 20%;
+      & label{
+        width: 20em;
+        & input{
+          width: 20em;
+        }
+      }
     }
   }
 `;
@@ -189,6 +228,9 @@ export const Table = styled.table`
         }
       }
     }
+  }
+  @media screen and (max-width: 768px) {
+
   }
 `;
 

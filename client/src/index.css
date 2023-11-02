@@ -69,3 +69,12 @@ body {
     opacity: 1;
   }
 }
+
+.activ{
+  display: block;
+  animation: slideIn 1s forwards;
+}
+.none{
+ display: none;
+  animation: slideIn 1s forwards;
+}

@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { Navbar } from "../../style/stylenav";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
-  faUsers, 
+  faUsers,
   faShoppingCart,
-  faDollarSign, 
-  faBuilding, 
-  faShoppingBag, 
+  faDollarSign,
+  faBuilding,
+  faShoppingBag,
+  faTimes,
+  faBars,
 } from "@fortawesome/free-solid-svg-icons";
 
 const linksData = [
@@ -20,20 +22,45 @@ const linksData = [
   { to: "/dashboard/compra", label: "Compra", icon: faShoppingBag },
 ];
 
-
 const Nav = () => {
+  const [activad, setActivad] = useState(true);
   return (
     <Navbar>
-      <ul>
+      <ul className="nav">
         {linksData.map((link, index) => (
           <li key={index} className="slide-in-icon">
-            <Link to={link.to} >
+            <Link to={link.to}>
               <FontAwesomeIcon icon={link.icon} /> {link.label}
             </Link>
           </li>
         ))}
       </ul>
-      <div><Outlet /></div>
+
+      {activad ? (
+        <ul className="nav780">
+          <button onClick={() => setActivad(!activad)}>
+            <FontAwesomeIcon icon={faTimes} />
+          </button>
+          {linksData.map((link, index) => (
+            <li key={index} className="slide-in-icon">
+              <Link to={link.to}>
+                <FontAwesomeIcon icon={link.icon} /> {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div className=" topnav">
+          <h1>PetShop</h1>
+          <button onClick={() => setActivad(!activad)}>
+            <FontAwesomeIcon icon={faBars} />
+          </button>
+        </div>
+      )}
+
+      <div>
+        <Outlet />
+      </div>
     </Navbar>
   );
 };

@@ -5,7 +5,7 @@ export const Navbar = styled.nav`
   height:100vh;
   width: 100vw;
   justify-content: start;
-  z-index:10;
+  z-index: 10;
 
   & a:active {
     color: ${colors.primary};
@@ -18,24 +18,31 @@ export const Navbar = styled.nav`
     width: 200px;
     font-size: 0.9em;
   }
-  & svg{
-    margin:0 1em;
+  & svg {
+    margin: 0 1em;
+  }
+
+  .nav780 {
+    display: none;
   }
   & > ul {
     width: 250px;
-    background-color: #3068D9;
+    background-color: #3068d9;
     height: 100vh;
     ${FlexComun}
     flex-direction:column;
     align-items: start;
     padding-left: 2em;
     box-shadow: 0 5px 10px #000;
-    gap:.5em;
+    gap: 0.5em;
+    & button {
+      display: none;
+    }
   }
   & li {
     list-style: none;
     position: relative;
-    
+
     /* &::after {
       ${PositcionComun}
       width:8px;
@@ -54,12 +61,51 @@ export const Navbar = styled.nav`
       border-radius: 50%;
     } */
   }
-  & > div{
-  ${FlexComun}
-  flex-direction:column;
-    height:100vh;
-    width:calc(100vw - 250px);
+  & > div {
+    ${FlexComun}
+    flex-direction:column;
+    height: 100vh;
+    width: calc(100vw - 250px);
     /* padding:2em; */
-    box-shadow:0 5px 10px #0005;
+    box-shadow: 0 5px 10px #0005;
+  }
+  .topnav {
+    display: none;
+  }
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    width: 100vw;
+    & > div{
+      width: 100vw;
+    }
+    .topnav {
+      display: flex;
+      flex-direction: row;
+      width: 100vw;
+      justify-content: space-around;
+      height: 10vh;
+      & svg {
+        padding: 1em;
+        background-color: ${colors.primary};
+        margin: 0;
+        color: ${colors.white};
+      }
+    }
+    .nav780 {
+      animation: slideIn 1s forwards;
+
+      & button {
+        display: flex;
+      }
+      display: flex;
+      position: fixed;
+      z-index: 100;
+      width: 80vw;
+    }
+    .nav {
+      display: none;
+    }
   }
 `;
