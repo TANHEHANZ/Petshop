@@ -1,13 +1,14 @@
-import React, { useId } from 'react'
+import React, { forwardRef, useId } from 'react'
 import styled from 'styled-components'
 
-const Input = ({ name, type, value, onChange, error }) => {
+const Input = forwardRef(({ name, type, value, onChange, error }, ref) => {
   const id = useId();
 
   return (
     <InputContainer>
       <label htmlFor={id}>{name}</label>
-      <input 
+      <input
+        ref={ref} 
         id={id}
         type={type || "text"}
         value={value}
@@ -16,7 +17,7 @@ const Input = ({ name, type, value, onChange, error }) => {
       {error && <b>{error}</b>}
     </InputContainer>
   )
-}
+})
 
 export default Input
 
