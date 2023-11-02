@@ -59,11 +59,11 @@ model Venta {
   id                    Int            @id @default(autoincrement())
   tipoPago              String
   descuento             Float
-  inpuestoGeneradoVenta Float
+  inpuestoGeneradoVenta Float?
   clienteId             Int
   fecha                 DateTime       @default(now())
   total                 Float
-  cliente               Cliente?       @relation(fields: [clienteId], references: [ci])
+  cliente               Cliente        @relation(fields: [clienteId], references: [ci])
   DetalleVenta          DetalleVenta[]
 }
 
