@@ -9,6 +9,9 @@ const linksData = [
   { to: "/dashboard/venta", label: "Venta" },
   { to: "/dashboard/proveedor", label: "Proveedor" },
   { to: "/dashboard/compra", label: "Compra" },
+  {to:"/dashboard/categoria",label:"Categoria"},
+  {to:"/dashboard/marca",label:"Marca"},
+
 ];
 
 const Nav = () => {

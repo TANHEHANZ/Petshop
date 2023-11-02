@@ -9,7 +9,7 @@ const Proveedor = () => {
     <Section>
     <h2>Proveedor</h2>
    <article> 
-      <label >buscar <input type="text" /></label> 
+      <label >Buscar <input type="text" /></label> 
    <button>Exportar</button>
    <button>Añadir</button>
    </article>

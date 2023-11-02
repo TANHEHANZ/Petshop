@@ -32,17 +32,6 @@ app.put("/compra/:id", async (req, res) => {
     message: "compra actualizaco correctamente",
   });
 });
-app.delete("/compra/:id", async (req, res) => {
-  const compra = await prisma.compra.delete({
-    where: {
-      id: Number(req.params.id),
-    },
-  });
-  res.json({
-    data: compra,
-    message: "compra eliminado correctamente",
-  });
-});
 app.get("/compra/:id", async (req, res) => {
   const compra = await prisma.compra.findUnique({
     where: {

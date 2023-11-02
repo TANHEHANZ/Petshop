@@ -7,7 +7,7 @@ const Venta = () => {
     <Section>
            <h2>Venta</h2>
       <article> 
-         <label >buscar <input type="text" /></label> 
+         <label >Buscar <input type="text" /></label> 
       <button onClick={() => open()}>Exportar</button>
       <button onClick={() => open()}>Añadir</button>
       </article>
