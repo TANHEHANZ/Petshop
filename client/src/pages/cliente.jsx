@@ -13,6 +13,8 @@ import {
   faExternalLinkSquareAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
+import { toast } from 'react-toastify';
+
 const Cliente = () => {
   const { item, modalRef, open, close } = useModal();
   const { res, handleGet, handleDelete } = useGetDelete("cliente");
@@ -77,8 +79,8 @@ const Cliente = () => {
           item={item}
           fields={formData}
           route={item ? `/cliente/${item.ci}` : "/cliente"}
-          onSuccess={(res) => {
-            alert(res.message);
+          onSuccess={res => {
+            toast.success(res.message);
             handleGet();
             close();
           }}

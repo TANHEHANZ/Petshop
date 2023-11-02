@@ -4,55 +4,90 @@ const app = express();
 const prisma = new PrismaClient();
 
 app.get("/marca", async (req, res) => {
-  const marca = await prisma.marca.findMany({});
-  res.json({
-    data: marca,
-    message: "marcas obtenidos correctamente",
-  });
+  try {
+    const marca = await prisma.marca.findMany({});
+    res.json({
+      data: marca,
+      message: "marcas obtenidas correctamente",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error al obtener marca",
+      error: error.message,
+    });
+  }
 });
 
 app.post("/marca", async (req, res) => {
-  const marca = await prisma.marca.create({
-    data: req.body,
-  });
-  res.json({
-    data: marca,
-    message: "marca creado correctamente",
-  });
+  try {
+    const marca = await prisma.marca.create({
+      data: req.body,
+    });
+    res.json({
+      data: marca,
+      message: "marca creado correctamente",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error al agregar marca",
+      error: error.message,
+    });
+  }
 });
 app.put("/marca/:id", async (req, res) => {
-  const marca = await prisma.marca.update({
-    where: {
-      id: Number(req.params.id),
-    },
-    data: req.body,
-  });
-  res.json({
-    data: marca,
-    message: "marcas actualizaco correctamente",
-  });
+  try {
+    const marca = await prisma.marca.update({
+      where: {
+        id: Number(req.params.id),
+      },
+      data: req.body,
+    });
+    res.json({
+      data: marca,
+      message: "marcas actualizaco correctamente",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error al actualizar marca",
+      error: error.message,
+    });
+  }
 });
 app.delete("/marca/:id", async (req, res) => {
-  const marca = await prisma.marca.delete({
-    where: {
-      id: Number(req.params.id),
-    },
-  });
-  res.json({
-    data: marca,
-    message: "marca eliminado correctamente",
-  });
+  try {
+    const marca = await prisma.marca.delete({
+      where: {
+        id: Number(req.params.id),
+      },
+    });
+    res.json({
+      data: marca,
+      message: "marca eliminado correctamente",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error al eliminar marca",
+      error: error.message,
+    });
+  }
 });
 app.get("/marca/:id", async (req, res) => {
-  const marca = await prisma.marca.findUnique({
-    where: {
-      id: Number(req.params.id),
-    },
-  });
-  res.json({
-    data: marca,
-    message: "marca obtenido correctamente",
-  });
+  try {
+    const marca = await prisma.marca.findUnique({
+      where: {
+        id: Number(req.params.id),
+      },
+    });
+    res.json({
+      data: marca,
+      message: "marca obtenido correctamente",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error al obtener marca",
+      error: error.message,
+    });
+  }
 });
 
-export default app
+export default app;

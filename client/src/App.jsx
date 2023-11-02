@@ -8,12 +8,26 @@ import Producto from "./pages/producto";
 import Venta from "./pages/venta";
 import Proveedor from "./pages/proveedor";
 import Compra from "./pages/compra";
+import DetalleProducto from "./pages/detalleProducto";
+import Categoria from "./pages/categoria";
+import Marca from "./pages/marca";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <HashRouter>
+      <ToastContainer position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light" />
       <Routes>
-      <Route path="/" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Nav />}>
           <Route path="/dashboard" element={<Home />} />
           <Route path="/dashboard/usuario" element={<User />} />
@@ -22,6 +36,9 @@ function App() {
           <Route path="/dashboard/venta" element={<Venta />} />
           <Route path="/dashboard/proveedor" element={<Proveedor />} />
           <Route path="/dashboard/compra" element={<Compra />} />
+          <Route path="/dashboard/detalleproducto" element={<DetalleProducto />} />
+          <Route path="/dashboard/categoria" element={<Categoria />} />
+          <Route path="/dashboard/marca" element={<Marca />} />
         </Route>
       </Routes>
     </HashRouter>

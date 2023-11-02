@@ -98,6 +98,10 @@ export const Navbar = styled.nav`
 
       & button {
         display: flex;
+        position:absolute;
+        top:2em;
+        right:3em;
+        padding: 1em;
       }
       display: flex;
       position: fixed;

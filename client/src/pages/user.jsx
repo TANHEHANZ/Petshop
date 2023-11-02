@@ -6,6 +6,8 @@ import { useGetDelete } from "../hooks/useGetDelete";
 import { Section, Table } from "../style/style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTrash, faPencil } from "@fortawesome/free-solid-svg-icons";
+import { toast } from "react-toastify";
+
 const User = () => {
   const { item, modalRef, open, close } = useModal();
   const { res, handleGet, handleDelete } = useGetDelete("usuario");
@@ -47,7 +49,7 @@ const User = () => {
           fields={formData}
           route={item ? `/usuario/${item.id}` : "/usuario"}
           onSuccess={(res) => {
-            alert(res.message);
+            toast.success(res.message);
             handleGet();
             close();
           }}

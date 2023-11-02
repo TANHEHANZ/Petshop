@@ -89,14 +89,14 @@ const Producto = () => {
       <h2>Productos</h2>
       <article>
         <label>
-          buscar <input type="text" />
+          Buscar <input type="text" />
         </label>
        <div>
        <button onClick={() => open()}>Exportar</button>
         <button onClick={() => open()}>Añadir</button>
        </div>
       </article>
-      <input type="text" placeholder="Agregar categoria" value={categoria} onChange={(e) => handleCategoria(e.target.value)} />
+{/*       <input type="text" placeholder="Agregar categoria" value={categoria} onChange={(e) => handleCategoria(e.target.value)} /> */}
       <Modal ref={modalRef}>
         <Form
           key={JSON.stringify(item)}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const backendUrl = "http://localhost:3000/";
 
 export const useGetDelete = (route) => {
@@ -7,7 +8,7 @@ export const useGetDelete = (route) => {
 
   const handleGet = async () => {
     const response = await fetch(backendUrl + route);
-    if(response.ok) {
+    if (response.ok) {
       const responseJson = await response.json();
       setRes(responseJson);
     }
@@ -21,9 +22,9 @@ export const useGetDelete = (route) => {
     const response = await fetch(`${backendUrl + route}/${id}`, {
       method: "DELETE"
     });
-    if(response.ok) {
+    if (response.ok) {
       const responseJson = await response.json();
-      alert(responseJson.message);
+      toast.success(responseJson.message);
       handleGet();
     }
   }

@@ -4,55 +4,51 @@ const app = express();
 const prisma = new PrismaClient();
 
 app.get("/detalleVenta", async (req, res) => {
-  const detalleVenta = await prisma.detalleVenta.findMany({});
-  res.json({
-    data: detalleVenta,
-    message: "detalleVenta obtenidos correctamente",
-  });
+  try {
+    const detalleVenta = await prisma.detalleVenta.findMany({});
+    res.json({
+      data: detalleVenta,
+      message: "detalleVenta obtenidos correctamente",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error al obtener detalleVenta",
+    });
+  }
 });
 
 app.post("/detalleVenta", async (req, res) => {
-  const detalleVenta = await prisma.detalleVenta.create({
-    data: req.body,
-  });
-  res.json({
-    data: detalleVenta,
-    message: "detalleVenta creado correctamente",
-  });
+  try {
+    const detalleVenta = await prisma.detalleVenta.create({
+      data: req.body,
+    });
+    res.json({
+      data: detalleVenta,
+      message: "detalleVenta creado correctamente",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error al agregar detalleVenta",
+    });
+  }
 });
 app.put("/detalleVenta/:id", async (req, res) => {
-  const detalleVenta = await prisma.detalleVenta.update({
-    where: {
-      id: Number(req.params.id),
-    },
-    data: req.body,
-  });
-  res.json({
-    data: detalleVenta,
-    message: "detalleVenta actualizaco correctamente",
-  });
-});
-app.delete("/detalleVenta/:id", async (req, res) => {
-  const detalleVenta = await prisma.detalleVenta.delete({
-    where: {
-      id: Number(req.params.id),
-    },
-  });
-  res.json({
-    data: detalleVenta,
-    message: "detalleVenta eliminado correctamente",
-  });
-});
-app.get("/detalleVenta/:id", async (req, res) => {
-  const detalleVenta = await prisma.detalleVenta.findUnique({
-    where: {
-      id: Number(req.params.id),
-    },
-  });
-  res.json({
-    data: detalleVenta,
-    message: "detalleVenta obtenido correctamente",
-  });
+  try {
+    const detalleVenta = await prisma.detalleVenta.update({
+      where: {
+        id: Number(req.params.id),
+      },
+      data: req.body,
+    });
+    res.json({
+      data: detalleVenta,
+      message: "detalleVenta actualizaco correctamente",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error al editar detalleVenta",
+    });
+  }
 });
 
-export default app
+export default app;
