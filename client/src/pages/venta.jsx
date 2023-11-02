@@ -4,10 +4,8 @@ import FilterVentas from "../components/filterVentas";
 import { data } from "../data/venta";
 import { useModal } from "../hooks/useModal";
 import Modal from "../components/global/modal";
-import Form from "../components/global/form";
 import styled from "styled-components";
 import { useGetDelete } from "../hooks/useGetDelete";
-import Datalist from "../components/global/datalist";
 import Input from "../components/global/input";
 import Select from "../components/global/select";
 import { toast } from "react-toastify";
@@ -146,7 +144,7 @@ const Venta = () => {
                 .filter(producto => producto.nombre.toLocaleLowerCase().includes(filter.toLocaleLowerCase()))
                 .map(producto => ({
                   value: JSON.stringify(producto),
-                  text: producto.nombre + ` (${producto.cantidad} unidades)`
+                  text: producto.nombre + ` (${producto.cantidad} ${producto.unidadmedida})`
                 })
               )}
               nodefault
@@ -198,25 +196,6 @@ const Venta = () => {
               <th>acciones</th>
             </tr>
           </thead>
-        
-          {/* <ul>
-        {data.map((venta) => (
-          <li key={venta.id}>
-            <h2>Cliente: {venta.cliente}</h2>
-            <p>Fecha: {venta.fecha}</p>
-            <p>Total: {venta.total}</p>
-            <h3>Detalle de Venta:</h3>
-            <ul>
-              {venta.detalleventa.map((detalle) => (
-                <li key={detalle.id}>
-                  <p>Producto ID: {detalle.productoId}</p>
-                  <p>Cantidad: {detalle.cantidad}</p>
-                  <p>Precio: {detalle.precio}</p>
-                </li>
-              ))}
-            </ul>
-            </li>
-        ))} */}
         <tbody>
           {
             data.map(producto => (

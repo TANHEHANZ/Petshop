@@ -2,7 +2,6 @@ import React from 'react'
 import { Section, Table } from '../style/style';
 import Modal from '../components/global/modal';
 import Form from '../components/global/form';
-import { dataproveedores } from '../data/proveedores';
 import { useModal } from '../hooks/useModal';
 import { useGetDelete } from '../hooks/useGetDelete';
 import { toast } from 'react-toastify';
@@ -12,21 +11,52 @@ const Proveedor = () => {
   const { res, handleGet, handleDelete } = useGetDelete("proveedor");
   const formData = [
     {
-      name: "nombre",
+      name: "razonSocial",
+      validations: {
+        required: true
+      }
+    },
+    {
+      name: "telefono",
+      type: "number",
+      validations: {
+        required: true
+      },
+    },
+    {
+      name: "gmail",
+      validations: {
+        required: true
+      },
+    }, {
+      name: "representante",
+      validations: {
+        required: true
+      },
+    },
+    {
+      name: "ciudad",
+      validations: {
+        required: true
+      }
+    },
+    {
+      name: "direccion",
       validations: {
         required: true
       }
     }
+
   ]
   return (
     <Section>
       <h2>Proveedor</h2>
       <article>
-          <label>
-            Buscar <input type="text" />
-          </label>     
-          <button onClick={() => open()}>Añadir</button>
-        </article>
+        <label>
+          Buscar <input type="text" />
+        </label>
+        <button onClick={() => open()}>Añadir</button>
+      </article>
       <Modal ref={modalRef}>
         <Form
           key={JSON.stringify(item)}
@@ -66,7 +96,7 @@ const Proveedor = () => {
                 <td className="pequeño">{proveedores.ciudad}</td>
                 <td>
                   <button onClick={() => open(proveedores)}>Editar</button>
-                  <button onClick={() => handleDelete(proveedores.ci)}>Eliminar</button>
+                  <button onClick={() => handleDelete(proveedores.id)}>Eliminar</button>
 
                 </td>
               </tr>
