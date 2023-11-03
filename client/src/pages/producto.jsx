@@ -90,7 +90,10 @@ const Producto = () => {
         <label>
           Buscar <input type="text" />
         </label>
+       <div>
+       <button onClick={() => open()}>Exportar</button>
         <button onClick={() => open()}>Añadir</button>
+       </div>
       </article>
       <Modal ref={modalRef}>
         <Form

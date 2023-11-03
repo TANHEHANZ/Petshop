@@ -9,8 +9,10 @@ import { useGetDelete } from "../hooks/useGetDelete";
 import Input from "../components/global/input";
 import Select from "../components/global/select";
 import { toast } from "react-toastify";
+import FormatDate from "../components/global/formatDate";
 const Venta = () => {
   const { open, close, modalRef } = useModal();
+  const { res: venta } = useGetDelete("venta");
   const { res: clienteRes } = useGetDelete("cliente");
   const { res: productoRes } = useGetDelete("producto");
   const [filter, setFilter] = useState("");
@@ -31,20 +33,20 @@ const Venta = () => {
       const productoExistente = old.productos.find(producto => producto.id === prod.id);
       return {
         ...old,
-        productos: 
-          productoExistente ? 
-          old.productos.map(producto => {
-            if(producto.id === prod.id) {
-              producto.cantidad += cant;
-            }
-            return producto;
-          }) 
-          :
-          [...old.productos, {
-            id: prod.id,
-            nombre: prod.nombre,
-            cantidad: cant
-          }]
+        productos:
+          productoExistente ?
+            old.productos.map(producto => {
+              if (producto.id === prod.id) {
+                producto.cantidad += cant;
+              }
+              return producto;
+            })
+            :
+            [...old.productos, {
+              id: prod.id,
+              nombre: prod.nombre,
+              cantidad: cant
+            }]
       }
     });
     setFilter("");
@@ -77,9 +79,9 @@ const Venta = () => {
       },
       body: body
     })
-    if(res.ok) {
+    if (res.ok) {
       const resJson = await res.json();
-      if(resJson.error) {
+      if (resJson.error) {
         toast.error(resJson.error);
       } else {
         toast.success(resJson.message);
@@ -88,37 +90,38 @@ const Venta = () => {
     }
   }
 
+ 
   return (
     <Section>
       <h2>Venta</h2>
-      <article> 
-        <label>Buscar<input type="text" /></label> 
-        <button onClick={() => {}}>Exportar</button>
+      <article>
+        <label>Buscar<input type="text" /></label>
+        <button onClick={() => { }}>Exportar</button>
         <button onClick={() => open()}>Añadir</button>
       </article>
-      <Modal ref={modalRef} >
+      <Modal ref={modalRef}>
         <Separator>
           <form>
-            <Select 
+            <Select
               name="Cliente"
               value={form.cliente}
-              onChange={e => setForm(old => ({...old, cliente: e.target.value }))}
+              onChange={e => setForm(old => ({ ...old, cliente: e.target.value }))}
               options={clienteRes?.data.map(cliente => ({
                 value: cliente.ci,
                 text: cliente.nombre
               }))}
               nodefault
             />
-            <Input 
+            <Input
               name="Descuento"
               value={form.descuento}
-              onChange={e => setForm(old => ({...old, descuento: e.target.value }))}
+              onChange={e => setForm(old => ({ ...old, descuento: e.target.value }))}
               type="number"
             />
-            <Select 
+            <Select
               name="Tipo de pago"
               value={form.tipoPago}
-              onChange={e => setForm(old => ({...old, tipoPago: e.target.value }))}
+              onChange={e => setForm(old => ({ ...old, tipoPago: e.target.value }))}
               options={[{
                 value: "efectivo",
                 text: "Efectivo"
@@ -130,26 +133,26 @@ const Venta = () => {
                 text: "Tarjeta"
               }]}
             />
-            <Input 
+            <Input
               name="Busqueda"
               value={filter}
               onChange={e => setFilter(e.target.value)}
             />
-            <Select 
+            <Select
               name="Producto"
               value={productoSeleccionado}
               onChange={e => setProductoSeleccionado(e.target.value)}
               options={
                 productoRes?.data
-                .filter(producto => producto.nombre.toLocaleLowerCase().includes(filter.toLocaleLowerCase()))
-                .map(producto => ({
-                  value: JSON.stringify(producto),
-                  text: producto.nombre + ` (${producto.cantidad} ${producto.unidadmedida})`
-                })
-              )}
+                  .filter(producto => producto.nombre.toLocaleLowerCase().includes(filter.toLocaleLowerCase()))
+                  .map(producto => ({
+                    value: JSON.stringify(producto),
+                    text: producto.nombre + ` (${producto.cantidad} ${producto.unidadmedida})`
+                  })
+                  )}
               nodefault
             />
-            <Input 
+            <Input
               name="Cantidad"
               value={cantidad}
               onChange={e => setCantidad(e.target.value)}
@@ -185,35 +188,34 @@ const Venta = () => {
         </Separator>
       </Modal>
       <div>
-      <Table>
+        <Table>
           <thead>
             <tr>
-              <th>id</th>
+             <th >Numero de venta</th>
+              <th>Fecha Registro</th>
               <th>Cliente</th>
-              <th>fecha</th>
+              <th>Tipo de pago</th>
               <th>total</th>
-              <th>DetalleVenta</th>
-              <th>acciones</th>
+          
             </tr>
           </thead>
-        <tbody>
-          {
-            data.map(producto => (
-              <tr  key={producto.id}>
-                <td className='pequeño'>{producto.id}</td> 
-                <td className='grande'>{producto.cliente}</td>  
-                <td>{producto.fecha}</td> 
-                <td>{producto.total}</td>  
-                <td>{ producto.detalle }</td>
-                <td><button onClick={() => open(producto)}>Editar</button>
-                <button onClick={() => handleDelete(producto.id)}>Eliminar</button></td>
-              </tr>
-            ))
-          }
-        </tbody>
+          <tbody>
+            {
+              venta?.data.map(venta => (
+                <tr key={venta.id}>
+                <td>{venta.id}</td>
+                  <td><FormatDate fecha={venta.fecha}/></td>
+                  <td className='grande'>{venta.cliente.nombre}</td>
+                  <td>{venta.tipoPago}</td>
+                  <td>{venta.total} Bs</td>
+                  <td><button>Ver detalle</button></td>
+                </tr>
+              ))
+            }
+          </tbody>
         </Table>
-     </div>
-     <FilterVentas/>
+      </div>
+      <FilterVentas />
     </Section>
   );
 };

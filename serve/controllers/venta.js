@@ -5,7 +5,11 @@ const prisma = new PrismaClient();
 
 app.get("/venta", async (req, res) => {
   try {
-    const venta = await prisma.venta.findMany({});
+    const venta = await prisma.venta.findMany({
+      include:{
+        cliente:true
+      }
+    });
     res.json({
       data: venta,
       message: "venta obtenidos correctamente",

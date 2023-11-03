@@ -4,7 +4,7 @@ export const Content = styled.div`
   width: 100vw;
   height: 100vh;
   ${FlexComun}
-  background-color:${colors.primary};
+  background-color:${colors.secundary};
   & form {
     display: flex;
     align-items: start;
@@ -12,12 +12,12 @@ export const Content = styled.div`
     flex-direction: column;
     width: 28em;
     height: 33em;
-    background-color: ${colors.secundary};
+    background-color: ${colors.primary};
     color: ${colors.white};
     padding: 2em;
     gap: 0.5em;
     border-radius: 1em;
-    box-shadow: 0 10px 20px ${colors.secundary};
+    box-shadow: 0 10px 20px ${colors.back};
 
     & h1 {
       width: 100%;
@@ -50,11 +50,12 @@ export const Content = styled.div`
       background-color: ${colors.secundary};
       border: none;
       position: relative;
-      color: ${colors.tercery};
+      color: ${colors.white};
       cursor: pointer;
       overflow: hidden;
       height: 3em;
       width: 10em;
+      border-radius: 7px;
       &::before {
         content: "";
         position: absolute;
@@ -87,12 +88,13 @@ export const Section = styled.section`
   align-items: start;
   flex-direction: column;
   background-color: ${colors.white};
+ 
   & > div {
-    width: 80vw;
+    width: 75vw;
     height: 50vh;
     overflow-y: scroll;
     margin: 2em auto;
-    padding:1em;
+    padding: 1em;
   }
   & > h2 {
     font-size: 2em;
@@ -100,26 +102,82 @@ export const Section = styled.section`
   }
   & > article {
     ${FlexComun}
-    justify-content:space-evenly;
+    justify-content:space-between;
     gap: 1em;
-    padding: 2em;
     box-shadow: 0px 5px 10px -5px #000;
     margin: 0;
+    padding: 2em 10em;
+    & > div {
+      ${FlexComun}
+      gap:2em;
+    }
+    & > label {
+      position: relative;
+      background-color: #d0ccc7;
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      flex-direction: column;
+      z-index: 20;
+      width: 100%;
+
+      &::first-letter {
+        text-transform: uppercase;
+      }
+    }
     & input {
-      width: 30em;
       background-color: transparent;
-      border: none;
-      border-bottom: solid 1px #0005;
+      border: solid 1px #0005;
       padding: 0.5em;
       outline: none;
+      width: 100%;
+      position: absolute;
+      bottom: -23px;
+      left: -10px;
     }
     & button {
-      padding: 0.5em 2em;
+      padding: 0.5em 1.5em;
       background-color: ${colors.secundary};
       color: ${colors.white};
       border: none;
       border-radius: 0.8em;
       cursor: pointer;
+    }
+  }
+  @media screen and (max-width: 1080px) {
+    & article{
+      flex-direction:column;
+      height: 20%;
+      & label{
+        width: 40em;
+        & input{
+          width: 30em;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 768px) {
+    & article{
+      flex-direction:column;
+      height: 20%;
+      & label{
+        width: 40em;
+        & input{
+          width: 30em;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 550px) {
+    & article{
+      flex-direction:column;
+      height: 20%;
+      & label{
+        width: 20em;
+        & input{
+          width: 20em;
+        }
+      }
     }
   }
 `;
@@ -129,7 +187,20 @@ export const Table = styled.table`
   border-collapse: collapse;
   & thead {
     border: solid 1px #0005;
-    height: 3em;
+    height: 2.5em;
+    background-color: ${colors.secundary300};
+    & > tr {
+    text-align: center;
+    border: solid 1px #0005;
+    font-size: 0.7em;
+    color:${colors.white};
+    text-transform:uppercase;
+    letter-spacing:2px;
+      background-color: ${colors.secundary600};
+    box-shadow: 0 5px 5px #0005;
+
+    }
+   
   }
   & tr {
     text-align: center;
@@ -137,6 +208,7 @@ export const Table = styled.table`
     font-size: 0.8em;
     & th {
       font-weight: 100;
+      background-color:${colors.secundary300};
       &::first-letter {
         text-transform: uppercase;
       }
@@ -148,12 +220,17 @@ export const Table = styled.table`
         padding: 0.5em;
         & button {
           background-color: ${colors.primary};
-          padding: 0.3em 1em;
+          padding: 0.5em 1em;
           border: none;
-          color: ${colors.white};
+          /* color: ${colors.white}; */
+          background-color: transparent;
+          cursor: pointer;
         }
       }
     }
+  }
+  @media screen and (max-width: 768px) {
+
   }
 `;
 
