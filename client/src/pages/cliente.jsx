@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useModal } from "../hooks/useModal";
 import Modal from "../components/global/modal";
 import Form from "../components/global/form";
@@ -13,9 +13,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import { toast } from 'react-toastify';
+import { filterBy } from "../utilities/filterBy";
 
 const Cliente = () => {
   const { item, modalRef, open, close } = useModal();
+  const [filter, setFilter] = useState("");
   const { res, handleGet, handleDelete } = useGetDelete("cliente");
 
   const formData = [
@@ -58,7 +60,7 @@ const Cliente = () => {
       <h2>Clientes</h2>
       <article>
         <label>
-          Buscar <input type="text" />
+          Buscar por nombre y apellido <input value={filter} onChange={e => setFilter(e.target.value)} type="text" />
         </label>
         <div>
           <button onClick={() => open()}>
@@ -98,7 +100,7 @@ const Cliente = () => {
             </tr>
           </thead>
           <tbody>
-            {res?.data.map((cliente) => (
+            {res?.data.filter(cliente => filterBy(cliente.nombre + " " + cliente.apellido, filter)).map((cliente) => (
               <tr key={cliente.id}>
                 <td className="pequeño">{cliente.ci}</td>
                 <td className="grande">{cliente.nombre}</td>

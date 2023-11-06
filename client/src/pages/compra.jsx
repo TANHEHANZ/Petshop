@@ -9,6 +9,8 @@ import Input from "../components/global/input";
 import Select from "../components/global/select";
 import { toast } from "react-toastify";
 import FormatDate from "../components/global/formatDate";
+import { formatDate } from "../utilities/formatDate";
+import { filterBy } from "../utilities/filterBy";
 
 const Compra = () => {
   const { open, close, modalRef } = useModal();
@@ -19,6 +21,7 @@ const Compra = () => {
   const [filter, setFilter] = useState("");
   const [productoSeleccionado, setProductoSeleccionado] = useState("");
   const [cantidad, setCantidad] = useState("1");
+  const [filterInput, setFilterInput] = useState("");
   const [form, setForm] = useState({
     proveedor: "",
     productos: []
@@ -83,6 +86,10 @@ const Compra = () => {
       } else {
         toast.success(resJson.message);
         handleGet();
+        setForm({
+          proveedor: "",
+          productos: []
+        });
         close();
       }
     }
@@ -97,7 +104,7 @@ const Compra = () => {
     <Section>
       <h2>Compra</h2>
       <article>
-        <label>Buscar<input type="text" /></label>
+        <label>Buscar por fecha<input value={filterInput} onChange={e => setFilterInput(e.target.value)} type="text" /></label>
         <button onClick={() => open()}>Añadir</button>
       </article>
       <Modal ref={modalDetalleRef}>
@@ -211,7 +218,7 @@ const Compra = () => {
           </thead>
           <tbody>
             {
-              compra?.data.map(compra => (
+              compra?.data.filter(compra => filterBy(formatDate(compra.fecha), filterInput)).map(compra => (
                 <tr key={compra.id}>
                   <td>{compra.id}</td>
                   <td className='grande'>{compra.proveedor.razonSocial}</td>

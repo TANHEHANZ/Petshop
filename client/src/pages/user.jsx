@@ -5,11 +5,13 @@ import Modal from "../components/global/modal";
 import { useGetDelete } from "../hooks/useGetDelete";
 import { Section, Table } from "../style/style";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faTrash, faPencil } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPencil } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
+import { filterBy } from "../utilities/filterBy";
 
 const User = () => {
   const { item, modalRef, open, close } = useModal();
+  const [filter, setFilter] = useState("");
   const { res, handleGet, handleDelete } = useGetDelete("usuario");
   const formData = [
     {
@@ -37,9 +39,8 @@ const User = () => {
       <h2>Usuarios</h2>
       <article>
         <label>
-          Buscar <input type="text" />
+          Buscar por nombre <input value={filter} onChange={e => setFilter(e.target.value)} type="text" />
         </label>
-
         <button onClick={() => open()}>Añadir</button>
       </article>
       <Modal ref={modalRef}>
@@ -68,7 +69,7 @@ const User = () => {
             </tr>
           </thead>
           <tbody>
-            {res?.data.map((usuario) => (
+            {res?.data.filter(usuario => filterBy(usuario.nombre, filter)).map((usuario) => (
               <tr key={usuario.id}>
                 <td className="pequeño">{usuario.id}</td>
                 <td className="grande">{usuario.nombre}</td>

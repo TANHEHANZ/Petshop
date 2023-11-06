@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Outlet, Navigate } from "react-router-dom";
+import { Link, Outlet, Navigate, NavLink } from "react-router-dom";
 import { Navbar } from "../../style/stylenav";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -39,9 +39,9 @@ const Nav = () => {
       <ul className="nav">
         {linksData.map((link, index) => (
           <li key={index} className="slide-in-icon">
-            <Link to={link.to}>
+            <NavLink to={link.to}>
               <FontAwesomeIcon icon={link.icon} /> {link.label}
-            </Link>
+            </NavLink>
           </li>
 
         ))}
@@ -60,9 +60,9 @@ const Nav = () => {
           </button>
           {linksData.map((link, index) => (
             <li key={index} className="slide-in-icon">
-              <Link to={link.to}>
+              <NavLink to={link.to}>
                 <FontAwesomeIcon icon={link.icon} /> {link.label}
-              </Link>
+              </NavLink>
             </li>
           ))}
         </ul>

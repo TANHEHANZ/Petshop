@@ -10,15 +10,18 @@ import Input from "../components/global/input";
 import Select from "../components/global/select";
 import { toast } from "react-toastify";
 import FormatDate from "../components/global/formatDate";
+import { filterBy } from "../utilities/filterBy";
+import { formatDate } from "../utilities/formatDate";
 const Venta = () => {
   const { open, close, modalRef } = useModal();
   const { item, open: openDetalle, modalRef: modalDetalleRef } = useModal();
-  const { res: venta } = useGetDelete("venta");
+  const { res: venta, handleGet } = useGetDelete("venta");
   const { res: clienteRes } = useGetDelete("cliente");
   const { res: productoRes } = useGetDelete("producto");
   const [filter, setFilter] = useState("");
   const [productoSeleccionado, setProductoSeleccionado] = useState("");
   const [cantidad, setCantidad] = useState("1");
+  const [filterInput, setFilterInput] = useState("");
   const [form, setForm] = useState({
     cliente: "",
     descuento: "",
@@ -86,6 +89,13 @@ const Venta = () => {
         toast.error(resJson.error);
       } else {
         toast.success(resJson.message);
+        handleGet();
+        setForm({
+          cliente: "",
+          descuento: "",
+          tipoPago: "",
+          productos: []
+        });
         close();
       }
     }
@@ -100,8 +110,7 @@ const Venta = () => {
     <Section>
       <h2>Venta</h2>
       <article>
-        <label>Buscar<input type="text" /></label>
-        <button onClick={() => { }}>Exportar</button>
+        <label>Buscar por fecha<input value={filterInput} onChange={e => setFilterInput(e.target.value)} type="text" /></label>
         <button onClick={() => open()}>Añadir</button>
       </article>
       <Modal ref={modalDetalleRef}>
@@ -237,7 +246,7 @@ const Venta = () => {
           </thead>
           <tbody>
             {
-              venta?.data.map(venta => (
+              venta?.data.filter(detalle => filterBy(formatDate(detalle.fecha), filterInput)).map(venta => (
                 <tr key={venta.id}>
                 <td>{venta.id}</td>
                   <td><FormatDate fecha={venta.fecha}/></td>

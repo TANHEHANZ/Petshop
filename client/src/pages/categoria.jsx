@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Section, Table } from '../style/style'
 import { useModal } from '../hooks/useModal';
 import { useGetDelete } from '../hooks/useGetDelete';
 import Modal from '../components/global/modal';
 import Form from '../components/global/form';
 import { toast } from "react-toastify";
+import { filterBy } from '../utilities/filterBy';
 const Categoria = () => {
     const { item, modalRef, open, close } = useModal();
     const { res, handleGet, handleDelete } = useGetDelete("categoria");
+  const [filter, setFilter] = useState("");
 
     const formData = [
         {
@@ -22,7 +24,7 @@ const Categoria = () => {
         <h2>Categoria</h2>
         <article>
           <label>
-            Buscar <input type="text" />
+            Buscar por nombre <input value={filter} onChange={e => setFilter(e.target.value)} type="text" />
           </label>     
           <button onClick={() => open()}>Añadir</button>
         </article>
@@ -49,7 +51,7 @@ const Categoria = () => {
             </tr>
           </thead>
           <tbody>
-            {res?.data.map((categoria) => (
+            {res?.data.filter(categoria => filterBy(categoria.nombre, filter)).map((categoria) => (
               <tr key={categoria.id}>
                 <td className="pequeño">{categoria.id}</td>
                 <td className="grande">{categoria.nombre}</td>
