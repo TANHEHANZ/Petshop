@@ -48,7 +48,7 @@ app.put("/venta/:id", async (req, res) => {
     });
     res.json({
       data: venta,
-      message: "venta actualizaco correctamente",
+      message: "venta actualizado correctamente",
     });
   } catch (error) {
     res.status(500).json({
@@ -84,7 +84,6 @@ app.post("/vender", async (req, res) => {
         }
       }
     });
-
     //VALIDAR
     let flag = false;
     req.body.productos.forEach(producto => {
@@ -98,7 +97,6 @@ app.post("/vender", async (req, res) => {
       }
     });
     if(flag) return;
-
     const total = productos.reduce((suma, producto) => {
       const productoVendido = req.body.productos.find(prod => prod.id === producto.id);
       const totalProducto = producto.precio * productoVendido.cantidad;

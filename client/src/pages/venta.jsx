@@ -37,7 +37,7 @@ const Venta = () => {
           productoExistente ?
             old.productos.map(producto => {
               if (producto.id === prod.id) {
-                producto.cantidad += cant;
+                producto.cantidad += (cant/2);
               }
               return producto;
             })

@@ -29,7 +29,7 @@ app.put("/compra/:id", async (req, res) => {
   });
   res.json({
     data: compra,
-    message: "compra actualizaco correctamente",
+    message: "compra actualizado correctamente",
   });
 });
 app.get("/compra/:id", async (req, res) => {
