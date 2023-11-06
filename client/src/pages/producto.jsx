@@ -90,7 +90,7 @@ const Producto = () => {
       <h2>Productos</h2>
       <article>
         <label>
-          Buscar por nombre <input value={filter} onChange={e => setFilter(e.target.value)} type="text" />
+          <p>Buscar por nombre</p> <input value={filter} onChange={e => setFilter(e.target.value)} type="text" />
         </label>
        <div>
        <button onClick={() => open()}>Exportar</button>

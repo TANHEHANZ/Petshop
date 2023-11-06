@@ -104,7 +104,7 @@ const Compra = () => {
     <Section>
       <h2>Compra</h2>
       <article>
-        <label>Buscar por fecha<input value={filterInput} onChange={e => setFilterInput(e.target.value)} type="text" /></label>
+        <label> <p>Buscar por fecha</p><input value={filterInput} onChange={e => setFilterInput(e.target.value)} type="text" /></label>
         <button onClick={() => open()}>Añadir</button>
       </article>
       <Modal ref={modalDetalleRef}>

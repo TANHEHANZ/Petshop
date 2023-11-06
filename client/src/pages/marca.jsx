@@ -25,7 +25,7 @@ const Marca = () => {
         <h2>Marca</h2>
         <article>
           <label>
-            Buscar por nombre <input value={filter} onChange={e => setFilter(e.target.value)} type="text" />
+            <p>Buscar por nombre</p> <input value={filter} onChange={e => setFilter(e.target.value)} type="text" />
           </label>     
           <button onClick={() => open()}>Añadir</button>
         </article>
