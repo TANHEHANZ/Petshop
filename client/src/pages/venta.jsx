@@ -19,9 +19,11 @@ const Venta = () => {
   const { res: clienteRes } = useGetDelete("cliente");
   const { res: productoRes } = useGetDelete("producto");
   const [filter, setFilter] = useState("");
+  const [filterCliente, setFiltercliente] = useState("");
   const [productoSeleccionado, setProductoSeleccionado] = useState("");
   const [cantidad, setCantidad] = useState("1");
   const [filterInput, setFilterInput] = useState("");
+
   const [form, setForm] = useState({
     cliente: "",
     descuento: "",
@@ -29,7 +31,7 @@ const Venta = () => {
     productos: []
   });
   const [error, setError] = useState({
-    recete:true
+    recete: true
   });
 
   const addProduct = (e) => {
@@ -71,17 +73,17 @@ const Venta = () => {
   }
   const handleVaidation = (e) => {
     e.preventDefault();
-   const newerror={}
-   if(form.cliente==""){
-    newerror.cliente="Seleccione un cliente";
-   }
-   setError(newerror);
-   
+    const newerror = {}
+    if (form.cliente == "") {
+      newerror.cliente = "Seleccione un cliente";
+    }
+    setError(newerror);
+
   }
   useEffect(() => {
-  if(Object.keys(error).length==0){
-    handleSend();
-  }
+    if (Object.keys(error).length == 0) {
+      handleSend();
+    }
   }, [error]);
   const handleSend = async (e) => {
     e.preventDefault();
@@ -157,39 +159,41 @@ const Venta = () => {
       </Modal>
       <Modal ref={modalRef}>
         <Separator>
-          <form>
-            <Select
-              name="Cliente"
-              value={form.cliente}
-              onChange={e => setForm(old => ({ ...old, cliente: e.target.value }))}
-              options={clienteRes?.data.map(cliente => ({
-                value: cliente.ci,
-                text: cliente.nombre+cliente.apellido,
-              }))}
-              nodefault
-              error={error.cliente}
-            />
-            <Input
-              name="Descuento"
-              value={form.descuento}
-              onChange={e => setForm(old => ({ ...old, descuento: e.target.value }))}
-              type="number"
-            />
-            <Select
-              name="Tipo de pago"
-              value={form.tipoPago}
-              onChange={e => setForm(old => ({ ...old, tipoPago: e.target.value }))}
-              options={[{
-                value: "efectivo",
-                text: "Efectivo"
-              }, {
-                value: "qr",
-                text: "QR"
-              }, {
-                value: "tarjeta",
-                text: "Tarjeta"
-              }]}
-            />
+          <form>              
+                <Input
+                  name="Nro Carnet"
+                  value={filterCliente}
+                  onChange={(e)=>setFiltercliente(e.target.value)}
+                  type="number"
+                />
+                <Select
+                  name="Cliente"
+                  value={form.cliente}
+                  onChange={e => setForm(old => ({ ...old, cliente: e.target.value }))}
+                  options={clienteRes?.data.filter(
+                    cliente=>filterBy(String(cliente.ci),filterCliente)
+                  ).map(cliente => ({
+                    value: cliente.ci,
+                    text: cliente.nombre + cliente.apellido,
+                  }))}
+                  nodefault
+                  error={error.cliente}
+                />
+             <Select
+                  name="Tipo de pago"
+                  value={form.tipoPago}
+                  onChange={e => setForm(old => ({ ...old, tipoPago: e.target.value }))}
+                  options={[{
+                    value: "efectivo",
+                    text: "Efectivo"
+                  }, {
+                    value: "qr",
+                    text: "QR"
+                  }, {
+                    value: "tarjeta",
+                    text: "Tarjeta"
+                  }]}
+                />
             <Input
               name="Busqueda"
               value={filter}
@@ -208,17 +212,24 @@ const Venta = () => {
                   })
                   )}
               nodefault
-            />
+            />   
             <Input
               name="Cantidad"
               value={cantidad}
               onChange={e => setCantidad(e.target.value)}
               type="number"
             />
+               <button onClick={addProduct}>Añadir producto</button>
+                <Input
+                  name="Descuento"
+                  value={form.descuento}
+                  onChange={e => setForm(old => ({ ...old, descuento: e.target.value }))}
+                  type="number"
+                />
+                <p>Total: {total}</p>
+             <button onClick={handleVaidation}>Vender</button>
             <div />
-            <button onClick={addProduct}>Añadir producto</button>
             <div />
-            <p>Total: {total}</p>
             <Table>
               <thead>
                 <tr>
@@ -243,7 +254,7 @@ const Venta = () => {
                 }
               </tbody>
             </Table>
-            <button onClick={handleVaidation}>Vender</button>
+
           </form>
         </Separator>
       </Modal>
@@ -294,4 +305,8 @@ const Separator = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+`;
+const Divcliente=styled.div`
+  width: 30vw;
+  height: 10vh;
 `;

@@ -1,3 +1,3 @@
-export const filterBy = (string: string, filter: string ) => {
+export const filterBy = (string, filter ) => {
   return string.toLocaleLowerCase().includes(filter.toLocaleLowerCase());
 }
