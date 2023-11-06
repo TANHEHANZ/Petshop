@@ -58,7 +58,7 @@ const Proveedor = () => {
       <h2>Proveedor</h2>
       <article>
         <label>
-          Buscar por razón social <input value={filter} onChange={e => setFilter(e.target.value)} type="text" />
+          <p>Buscar por razón social</p> <input value={filter} onChange={e => setFilter(e.target.value)} type="text" />
         </label>
         <button onClick={() => open()}>Añadir</button>
       </article>

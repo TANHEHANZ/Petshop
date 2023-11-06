@@ -130,6 +130,14 @@ export const Section = styled.section`
       z-index: 20;
       width: 100%;
 
+      & > p {
+        position: absolute;
+        top: -10px;
+        left: .5em;
+        background-color: #d0ccc7;
+        padding: 0 10px;
+      }
+
       &::first-letter {
         text-transform: uppercase;
       }
@@ -140,9 +148,6 @@ export const Section = styled.section`
       padding: 0.5em;
       outline: none;
       width: 100%;
-      position: absolute;
-      bottom: -23px;
-      left: -10px;
     }
     & button {
       padding: 0.5em 1.5em;
