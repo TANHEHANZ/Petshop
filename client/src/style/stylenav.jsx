@@ -48,11 +48,11 @@ export const Navbar = styled.nav`
     h1{
       text-align: center;
       width: 85%;
-      margin-bottom: 200px;
+      margin-bottom: 130px;
     color: #fff;
     font-size: 35px;
-    border-bottom: 1px solid #fff;
-    border-radius: 10px;
+    border-bottom: 5px solid #fff;
+
     }
   }
   & li {
