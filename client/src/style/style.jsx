@@ -3,34 +3,42 @@ import { FlexComun, colors } from "./styleGlobal";
 export const Content = styled.div`
   width: 100vw;
   height: 100vh;
-  ${FlexComun}
-  background-color:${colors.secundary};
+  display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+background-color: #e6eaf2;
   & form {
     display: flex;
-    align-items: start;
+    align-items: center;
     justify-content: center;
     flex-direction: column;
     width: 28em;
-    height: 33em;
-    background-color: ${colors.primary};
-    color: ${colors.white};
-    padding: 2em;
+    height: 35em;
+    background-color: #fff;
+    box-shadow: 1px 3px 2px 4px rgba(0,0,0,.1);
+    color: #fff;
+    padding: 3em;
     gap: 0.5em;
     border-radius: 1em;
-    box-shadow: 0 10px 20px ${colors.back};
-
+    & img{
+      width: 155px;
+      height:150px;
+    }
     & h1 {
       width: 100%;
       text-align: center;
       font-size: 2em;
-      margin: 1em 0;
+     margin: 10px 0px;
       font-weight: 600;
+      color: #000;
     }
     & label {
       font-size: 0.8em;
-      width: 90%;
+      width: 100%;
       text-align: start;
-      color: ${colors.tercery};
+      color: #a8a5a5;
+      font-weight: 600;
     }
     & input {
       width: 100%;
@@ -39,22 +47,23 @@ export const Content = styled.div`
       border-bottom: solid 1px ${colors.white};
       padding: 1em;
       outline: none;
-      color: ${colors.tercery};
+      color: #1877F2;
     }
     & > input:focus {
-      border-bottom: solid 1px ${colors.tercery};
+      border-bottom: solid 1px #1877F2;
     }
     & > button {
       margin: 2em 0;
       text-transform: uppercase;
-      background-color: ${colors.secundary};
+      background-color: #1877F2;
       border: none;
       position: relative;
-      color: ${colors.white};
+      color: #fff;
       cursor: pointer;
       overflow: hidden;
-      height: 3em;
-      width: 10em;
+      height: 5em;
+      width: 100%;
+      font-weight: 600;
       border-radius: 7px;
       &::before {
         content: "";

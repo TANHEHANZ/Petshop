@@ -29,7 +29,7 @@ export const Navbar = styled.nav`
   }
   & > ul {
     width: 250px;
-    background-color: #3068d9;
+    background-color: #1877F2;
     height: 100vh;
     ${FlexComun}
     flex-direction:column;
@@ -39,6 +39,15 @@ export const Navbar = styled.nav`
     gap: 0.5em;
     & button {
       display: none;
+    }
+    h1{
+      text-align: center;
+      width: 85%;
+      margin-bottom: 200px;
+    color: #fff;
+    font-size: 35px;
+    border-bottom: 1px solid #fff;
+    border-radius: 10px;
     }
   }
   & li {
