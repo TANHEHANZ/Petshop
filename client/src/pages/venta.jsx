@@ -70,7 +70,6 @@ const Venta = () => {
       descuento: Number(form.descuento),
       productos: form.productos
     })
-    console.log(body);
     const res = await fetch(`http://localhost:3000/vender`, {
       method: "POST",
       headers: {
@@ -198,25 +197,6 @@ const Venta = () => {
               <th>acciones</th>
             </tr>
           </thead>
-        
-          {/* <ul>
-        {data.map((venta) => (
-          <li key={venta.id}>
-            <h2>Cliente: {venta.cliente}</h2>
-            <p>Fecha: {venta.fecha}</p>
-            <p>Total: {venta.total}</p>
-            <h3>Detalle de Venta:</h3>
-            <ul>
-              {venta.detalleventa.map((detalle) => (
-                <li key={detalle.id}>
-                  <p>Producto ID: {detalle.productoId}</p>
-                  <p>Cantidad: {detalle.cantidad}</p>
-                  <p>Precio: {detalle.precio}</p>
-                </li>
-              ))}
-            </ul>
-            </li>
-        ))} */}
         <tbody>
           {
             data.map(producto => (
