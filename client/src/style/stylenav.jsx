@@ -12,6 +12,9 @@ export const Navbar = styled.nav`
     color: #3068d9;
   }
   & a {
+    & > svg {
+      width: 30px;
+    }
     text-decoration: none;
     padding: 0.7em 1em;
     display: block;
