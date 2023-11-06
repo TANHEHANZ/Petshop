@@ -44,7 +44,7 @@ app.put("/proveedor/:id", async (req, res) => {
     });
     res.json({
       data: proveedor,
-      message: "proveedor actualizaco correctamente",
+      message: "proveedor actualizado correctamente",
     });
   } catch (error) {
     res.status(500).json({

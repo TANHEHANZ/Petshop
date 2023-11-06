@@ -44,7 +44,7 @@ app.put("/categoria/:id", async (req, res) => {
     });
     res.json({
       data: categoria,
-      message: "categorias actualizaco correctamente",
+      message: "categoria actualizado correctamente",
     });
   } catch (error) {
     res.status(500).json({

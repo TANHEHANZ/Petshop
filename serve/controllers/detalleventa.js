@@ -42,7 +42,7 @@ app.put("/detalleVenta/:id", async (req, res) => {
     });
     res.json({
       data: detalleVenta,
-      message: "detalleVenta actualizaco correctamente",
+      message: "detalleVenta actualizado correctamente",
     });
   } catch (error) {
     res.status(500).json({

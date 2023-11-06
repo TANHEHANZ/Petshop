@@ -8,7 +8,7 @@ export const Content = styled.div`
   & form {
     display: flex;
     align-items: start;
-    justify-content: start;
+    justify-content: center;
     flex-direction: column;
     width: 28em;
     height: 33em;

@@ -44,7 +44,7 @@ app.put("/marca/:id", async (req, res) => {
     });
     res.json({
       data: marca,
-      message: "marcas actualizaco correctamente",
+      message: "marca actualizado correctamente",
     });
   } catch (error) {
     res.status(500).json({

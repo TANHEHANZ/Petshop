@@ -44,7 +44,7 @@ app.put("/cliente/:id", async (req, res) => {
     });
     res.json({
       data: cliente,
-      message: "clientes actualizaco correctamente",
+      message: "cliente actualizado correctamente",
     });
   } catch (error) {
     res.status(500).json({

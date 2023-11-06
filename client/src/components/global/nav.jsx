@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, Navigate } from "react-router-dom";
 import { Navbar } from "../../style/stylenav";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -11,19 +11,29 @@ import {
   faShoppingBag,
   faTimes,
   faBars,
+  faDoorClosed
 } from "@fortawesome/free-solid-svg-icons";
-
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useUser } from "../../store/user";
 const linksData = [
   { to: "/dashboard/usuario", label: "Usuario", icon: faUser },
   { to: "/dashboard/cliente", label: "Cliente", icon: faUsers },
   { to: "/dashboard/producto", label: "Producto", icon: faShoppingCart },
   { to: "/dashboard/venta", label: "Venta", icon: faDollarSign },
   { to: "/dashboard/proveedor", label: "Proveedor", icon: faBuilding },
-  { to: "/dashboard/compra", label: "Compra", icon: faShoppingBag },
+  { to: "/dashboard/compra", label: "Compra", icon: faShoppingBag }
 ];
-
 const Nav = () => {
+  const { setUser, user, logout } = useUser();
   const [activad, setActivad] = useState(true);
+
+  const handlerLogout = () => {
+    logout();
+  }
+  if (!user) {
+    return <Navigate to={"/"}></Navigate>
+  }
   return (
     <Navbar>
       <ul className="nav">
@@ -33,9 +43,16 @@ const Nav = () => {
               <FontAwesomeIcon icon={link.icon} /> {link.label}
             </Link>
           </li>
-        ))}
-      </ul>
 
+        ))}
+        <li className="slide-in-icon">
+          <Link onClick={handlerLogout} to={"/"}>
+            <FontAwesomeIcon icon={faDoorClosed} />
+            Logout
+          </Link>
+        </li>
+
+      </ul>
       {activad ? (
         <ul className="nav780">
           <button onClick={() => setActivad(!activad)}>

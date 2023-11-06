@@ -44,7 +44,7 @@ app.put("/usuario/:id", async (req, res) => {
     });
     res.json({
       data: usuario,
-      message: "usuarios actualizaco correctamente",
+      message: "usuario actualizado correctamente",
     });
   } catch (error) {
     res.status(500).json({
@@ -90,4 +90,25 @@ app.get("/usuario/:id", async (req, res) => {
   }
 });
 
+app.post("/login", async (req, res) => {
+  const { correo, password } = req.body;
+  const login = await prisma.usuario.findUnique({
+    where: {
+      correo: correo,
+      password: password,
+    },
+  });
+  if(!login){
+   res.json({
+    message:"Usuario no autorizado",
+    error:"Usuario no autorizado"
+   })
+   return
+  }
+ login.password=undefined;
+  res.json({
+    message:"Inicio de sesion correcto",
+    data:login
+  })
+});
 export default app;

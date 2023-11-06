@@ -21,7 +21,6 @@ export const Navbar = styled.nav`
   & svg {
     margin: 0 1em;
   }
-
   .nav780 {
     display: none;
   }
