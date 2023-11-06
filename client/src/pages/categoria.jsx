@@ -6,6 +6,8 @@ import Modal from '../components/global/modal';
 import Form from '../components/global/form';
 import { toast } from "react-toastify";
 import { filterBy } from '../utilities/filterBy';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 const Categoria = () => {
     const { item, modalRef, open, close } = useModal();
     const { res, handleGet, handleDelete } = useGetDelete("categoria");
@@ -56,9 +58,12 @@ const Categoria = () => {
                 <td className="pequeño">{categoria.id}</td>
                 <td className="grande">{categoria.nombre}</td>
                 <td>
-                  <button onClick={() => open(categoria)}>Editar</button>
+                  <button onClick={() => open(categoria)}><FontAwesomeIcon icon={faPencil}/></button>
                   <button onClick={() => handleDelete(categoria.id)}>
-                    Eliminar
+                  <FontAwesomeIcon
+                      icon={faTrash}
+                      style={{ color: "#1877F2" }}
+                    />
                   </button>
                 </td>
               </tr>

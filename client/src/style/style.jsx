@@ -96,8 +96,7 @@ export const Section = styled.section`
   height: 100%;
   align-items: start;
   flex-direction: column;
-  background-color: ${colors.white};
- 
+background-color: #e6eaf2;
   & > div {
     width: 75vw;
     height: 50vh;
@@ -116,14 +115,14 @@ export const Section = styled.section`
     gap: 1em;
   border-bottom: 1px solid rgba(0,0,0,0.3);
     margin: 0;
-    padding: 0em 10em 2em;
+    padding: 2em 10em 2em;
     & > div {
       ${FlexComun}
       gap:2em;
     }
     & > label {
       position: relative;
-      background-color: #d0ccc7;
+      background-color: #e6eaf2;
       font-size: 12px;
       font-weight: 600;
       display: flex;
@@ -135,7 +134,7 @@ export const Section = styled.section`
         position: absolute;
         top: -10px;
         left: .5em;
-        background-color: #d0ccc7;
+        background-color: #e6eaf2;
         padding: 0 10px;
       }
 
@@ -152,8 +151,8 @@ export const Section = styled.section`
     }
     & button {
       padding: 0.5em 1.5em;
-      background-color: ${colors.secundary};
-      color: ${colors.white};
+      background-color: #1877F2;
+      color: #fff;
       border: none;
       border-radius: 0.8em;
       cursor: pointer;
@@ -196,34 +195,34 @@ export const Section = styled.section`
     }
   }
 `;
-export const Table = styled.table`
+export const Table= styled.table`
   width: 100%;
   margin: 0em auto;
   border-collapse: collapse;
   & thead {
-    border: solid 1px #0005;
+    
     height: 2.5em;
     background-color: ${colors.secundary300};
     & > tr {
-    text-align: center;
-    border: solid 1px #0005;
+  text-align: center;
     font-size: 0.7em;
     color:${colors.white};
     text-transform:uppercase;
     letter-spacing:2px;
       background-color: ${colors.secundary600};
-    box-shadow: 0 5px 5px #0005;
+      box-shadow: 1px 3px 2px 4px rgba(0,0,0,.1);
 
     }
    
   }
   & tr {
     text-align: center;
-    border: solid 1px #0005;
+    border: solid 1px #48474754;
     font-size: 0.8em;
     & th {
+      color: #fff;
       font-weight: 100;
-      background-color:${colors.secundary300};
+      background-color:#1877F2;
       &::first-letter {
         text-transform: uppercase;
       }
@@ -237,10 +236,12 @@ export const Table = styled.table`
           background-color: ${colors.primary};
           padding: 0.5em 1em;
           border: none;
-          /* color: ${colors.white}; */
+          color: #1877F2; 
           background-color: transparent;
           cursor: pointer;
+         
         }
+
       }
     }
   }

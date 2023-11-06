@@ -6,6 +6,8 @@ import Form from '../components/global/form';
 import Modal from '../components/global/modal';
 import { toast } from 'react-toastify';
 import { filterBy } from '../utilities/filterBy';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const Marca = () => {
     const { item, modalRef, open, close } = useModal();
@@ -57,9 +59,12 @@ const Marca = () => {
                 <td className="pequeño">{marca.id}</td>
                 <td className="grande">{marca.nombre}</td>
                 <td>
-                  <button onClick={() => open(marca)}>Editar</button>
+                  <button onClick={() => open(marca)}><FontAwesomeIcon icon={faPencil}/></button>
                   <button onClick={() => handleDelete(marca.id)}>
-                    Eliminar
+                  <FontAwesomeIcon
+                      icon={faTrash}
+                      style={{ color: "#1877F2" }}
+                    />
                   </button>
                 </td>
               </tr>

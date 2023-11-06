@@ -17,14 +17,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useUser } from "../../store/user";
 const linksData = [
-  { to: "/dashboard/usuario", label: "Usuario", icon: faUser },
+  
   { to: "/dashboard/venta", label: "Venta", icon: faDollarSign },
   { to: "/dashboard/cliente", label: "Cliente", icon: faUsers },
+  { to: "/dashboard/proveedor", label: "Proveedor", icon: faBuilding },
+  { to: "/dashboard/compra", label: "Compra", icon: faShoppingBag },
   { to: "/dashboard/producto", label: "Producto", icon: faShoppingCart },
   { to: "/dashboard/categoria", label: "Categoria", icon: faBox },
   { to: "/dashboard/marca", label: "Marca", icon: faLock },
-  { to: "/dashboard/proveedor", label: "Proveedor", icon: faBuilding },
-  { to: "/dashboard/compra", label: "Compra", icon: faShoppingBag }
+  { to: "/dashboard/usuario", label: "Usuario", icon: faUser }
 ];
 const Nav = () => {
   const { setUser, user, logout } = useUser();
@@ -47,7 +48,7 @@ const Nav = () => {
             </NavLink>
           </li>
         ))}
-        <li className="slide-in-icon">
+        <li className="slide-in-icon" >
           <Link onClick={handlerLogout} to={"/"}>
             <FontAwesomeIcon icon={faDoorClosed} />
             Salir

@@ -69,9 +69,9 @@ const User = () => {
             </tr>
           </thead>
           <tbody>
-            {res?.data.filter(usuario => filterBy(usuario.nombre, filter)).map((usuario) => (
+            {res?.data.filter(usuario => filterBy(usuario.nombre, filter)).map((usuario,i) => (
               <tr key={usuario.id}>
-                <td className="pequeño">{usuario.id}</td>
+                <td className="pequeño">{i+1}</td>
                 <td className="grande">{usuario.nombre}</td>
                 <td className="grande">{usuario.correo}</td>
                 <td>{usuario.password}</td>
@@ -80,11 +80,10 @@ const User = () => {
                 </td>
                 <td>
                   <button onClick={() => open(usuario)}>
-    
-                    <FontAwesomeIcon icon={faPencil} bounce/>
+                    <FontAwesomeIcon icon={faPencil}/>
                   </button>
-                  <button onClick={() => handleDelete(usuario.id)} style={{color:"#7c281a"}}>
-                    <FontAwesomeIcon icon={faTrash} bounce/>
+                  <button onClick={() => handleDelete(usuario.id)} style={{color:"#1877F2"}}>
+                    <FontAwesomeIcon icon={faTrash} />
                   </button>
                 </td>
               </tr>

@@ -111,16 +111,14 @@ const Cliente = () => {
                   <button onClick={() => open(cliente)}>
                     <FontAwesomeIcon
                       icon={faPencil}
-                      bounce
-                      style={{ color: "green" }}
+                      
                     />
                   </button>
                   <button onClick={() => handleDelete(cliente.ci)}>
                     <FontAwesomeIcon
                       icon={faTrash}
-                      bounce
-                      style={{ color: "#7c281a" }}
-                    />{" "}
+                      style={{ color: "#1877F2" }}
+                    />
                   </button>
                 </td>
               </tr>

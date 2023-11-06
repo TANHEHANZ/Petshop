@@ -104,16 +104,15 @@ const Proveedor = () => {
             
                     <FontAwesomeIcon
                       icon={faPencil}
-                      bounce
-                      style={{ color: "green" }}
+                     
                     />
                   </button>
                   <button onClick={() => handleDelete(proveedores.ci)}>
       
                     <FontAwesomeIcon
                       icon={faTrash}
-                      bounce
-                      style={{ color: "#7c281a" }}
+                
+                      style={{ color: "#1877F2" }}
                     />
                   </button>
                 </td>

@@ -26,7 +26,6 @@ const Modal = forwardRef(({ children }, modalRef) => {
   return (
     <Dialog ref={modalRef}>
       <div>
-        {" "}
         <button onClick={close}>X</button>
       </div>
       {children}
@@ -42,15 +41,18 @@ const Dialog = styled.dialog`
   top: 50%;
   transform: translate(-50%, -50%);
   border: none;
+ padding: 5px;
   /* box-shadow: 0 5px 10px #0005; */
-
+ max-height: 600px;
+ overflow: auto;
   border-radius: 0.5em;
   width: 45em;
   & > div {
     width: 100%;
-    border-bottom: solid 1px #0009;
-    box-shadow: 0 2px 5px #0005;
+    border-bottom: solid 1px rgba(0,0,0,.2);
     padding: 1em 2em;
+    display: flex;
+    justify-content: end;
     & > button {
       width: 30px;
       height: 30px;
@@ -59,8 +61,8 @@ const Dialog = styled.dialog`
       cursor: pointer;
       font-size: 0.6em;
       box-shadow: 0 1px 2px #0005;
-      background-color: ${colors.primary};
-      color: ${colors.white};
+      background-color: #1877F2;
+      color: #fff;
     }
   }
   & form {
@@ -80,7 +82,7 @@ const Dialog = styled.dialog`
       position: absolute;
       text-align: start;
       font-size: 0.7em;
-      color: ${colors.primary};
+      color: #1877F2;
       top: -7px;
       left: 10px;
       transition: 0.3s;
@@ -103,15 +105,21 @@ const Dialog = styled.dialog`
       padding: 1em;
       outline: none;
       border-radius: 0.2em;
-
     }
+    & select {
+      border: solid 1px #0005;
+      height: 90%;
+      outline: none;
+      border-radius: 0.2em;
+    }
+    
 
     & textarea {
       height: 150px;
     }
     & > button {
-      background-color: ${colors.primary};
-      color: ${colors.tercery};
+      background-color: #1877F2;
+      color: #fff;
       padding: 0.7em 3.5em;
       margin: 1em auto 0 auto;
       border-radius: 0.5em;

@@ -6,6 +6,8 @@ import Form from "../components/global/form";
 import { Section, Table } from "../style/style";
 import { toast } from "react-toastify";
 import { filterBy } from "../utilities/filterBy";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const Producto = () => {
   const { item, modalRef, open, close } = useModal();
@@ -37,8 +39,8 @@ const Producto = () => {
     },
     {
       name: "marcaId",
-      displayName:"marca",
-      selectType:"number",
+      displayName: "marca",
+      selectType: "number",
       type: "select",
       optionDisplayName: "nombre",
       optionValue: "id",
@@ -57,8 +59,8 @@ const Producto = () => {
     },
     {
       name: "categoriaId",
-      displayName:"categoria",
-      selectType:"number",
+      displayName: "categoria",
+      selectType: "number",
       type: "select",
       optionDisplayName: "nombre",
       optionValue: "id",
@@ -92,10 +94,10 @@ const Producto = () => {
         <label>
           <p>Buscar por nombre</p> <input value={filter} onChange={e => setFilter(e.target.value)} type="text" />
         </label>
-       <div>
-       <button onClick={() => open()}>Exportar</button>
-        <button onClick={() => open()}>Añadir</button>
-       </div>
+        <div>
+          <button onClick={() => open()}>Exportar</button>
+          <button onClick={() => open()}>Añadir</button>
+        </div>
       </article>
       <Modal ref={modalRef}>
         <Form
@@ -133,9 +135,14 @@ const Producto = () => {
                 <td>{producto.precioCompra}</td>
                 <td>{producto.cantidad}</td>
                 <td>
-                  <button onClick={() => open(producto)}>Editar</button>
+                  <button onClick={() => open(producto)}>
+                    <FontAwesomeIcon icon={faPencil} />
+                  </button>
                   <button onClick={() => handleDelete(producto.id)}>
-                    Eliminar
+                    <FontAwesomeIcon
+                      icon={faTrash}
+                      style={{ color: "#1877F2" }}
+                    />
                   </button>
                 </td>
               </tr>

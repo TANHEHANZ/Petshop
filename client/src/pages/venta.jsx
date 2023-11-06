@@ -1,7 +1,5 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Section, Table } from "../style/style";
-import FilterVentas from "../components/filterVentas";
-import { data } from "../data/venta";
 import { useModal } from "../hooks/useModal";
 import Modal from "../components/global/modal";
 import styled from "styled-components";
@@ -12,6 +10,8 @@ import { toast } from "react-toastify";
 import FormatDate from "../components/global/formatDate";
 import { filterBy } from "../utilities/filterBy";
 import { formatDate } from "../utilities/formatDate";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 const Venta = () => {
   const { open, close, modalRef } = useModal();
   const { item, open: openDetalle, modalRef: modalDetalleRef } = useModal();
@@ -28,6 +28,9 @@ const Venta = () => {
     tipoPago: "",
     productos: []
   });
+  const [error, setError] = useState({
+    recete:true
+  });
 
   const addProduct = (e) => {
     e.preventDefault();
@@ -41,7 +44,7 @@ const Venta = () => {
           productoExistente ?
             old.productos.map(producto => {
               if (producto.id === prod.id) {
-                producto.cantidad += (cant/2);
+                producto.cantidad += (cant / 2);
               }
               return producto;
             })
@@ -66,7 +69,20 @@ const Venta = () => {
       productos: old.productos.filter(producto => producto.id !== id)
     }))
   }
-
+  const handleVaidation = (e) => {
+    e.preventDefault();
+   const newerror={}
+   if(form.cliente==""){
+    newerror.cliente="Seleccione un cliente";
+   }
+   setError(newerror);
+   
+  }
+  useEffect(() => {
+  if(Object.keys(error).length==0){
+    handleSend();
+  }
+  }, [error]);
   const handleSend = async (e) => {
     e.preventDefault();
     const body = JSON.stringify({
@@ -148,9 +164,10 @@ const Venta = () => {
               onChange={e => setForm(old => ({ ...old, cliente: e.target.value }))}
               options={clienteRes?.data.map(cliente => ({
                 value: cliente.ci,
-                text: cliente.nombre
+                text: cliente.nombre+cliente.apellido,
               }))}
               nodefault
+              error={error.cliente}
             />
             <Input
               name="Descuento"
@@ -226,7 +243,7 @@ const Venta = () => {
                 }
               </tbody>
             </Table>
-            <button onClick={handleSend}>Enviar</button>
+            <button onClick={handleVaidation}>Vender</button>
           </form>
         </Separator>
       </Modal>
@@ -234,7 +251,7 @@ const Venta = () => {
         <Table>
           <thead>
             <tr>
-             <th >Numero de venta</th>
+              <th >Numero de venta</th>
               <th>Fecha Registro</th>
               <th>Cliente</th>
               <th>Tipo de pago</th>
@@ -248,21 +265,25 @@ const Venta = () => {
             {
               venta?.data.filter(detalle => filterBy(formatDate(detalle.fecha), filterInput)).map(venta => (
                 <tr key={venta.id}>
-                <td>{venta.id}</td>
-                  <td><FormatDate fecha={venta.fecha}/></td>
+                  <td>{venta.id}</td>
+                  <td><FormatDate fecha={venta.fecha} /></td>
                   <td className='grande'>{venta.cliente.nombre}</td>
                   <td>{venta.tipoPago}</td>
                   <td>{venta.total + venta.descuento} Bs</td>
                   <td>{venta.descuento} Bs</td>
                   <td>{venta.total} Bs</td>
-                  <td><button onClick={() => openDetalle(venta)}>Ver detalle</button></td>
+                  <td ><button onClick={() => openDetalle(venta)}>
+                    <FontAwesomeIcon
+                      icon={faEye}
+                      style={{ color: "#1877F2" }}
+                    />
+                    Ver detalle</button></td>
                 </tr>
               ))
             }
           </tbody>
         </Table>
       </div>
-      <FilterVentas />
     </Section>
   );
 };

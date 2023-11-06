@@ -11,6 +11,8 @@ import { toast } from "react-toastify";
 import FormatDate from "../components/global/formatDate";
 import { formatDate } from "../utilities/formatDate";
 import { filterBy } from "../utilities/filterBy";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 const Compra = () => {
   const { open, close, modalRef } = useModal();
@@ -225,7 +227,12 @@ const Compra = () => {
                   <td><FormatDate fecha={compra.fecha}/></td>
                   <td>{compra.total} Bs</td>
                   <td>
-                    <button onClick={() => openDetalle(compra)}>Ver detalle</button>
+                    <button onClick={() => openDetalle(compra)}>
+                    <FontAwesomeIcon
+                      icon={faEye}
+                      style={{ color: "#1877F2" }}
+                    />
+                      Ver detalle</button>
                   </td>
                 </tr>
               ))
