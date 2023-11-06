@@ -114,7 +114,7 @@ const Dialog = styled.dialog`
       color: ${colors.tercery};
       padding: 0.7em 3.5em;
       margin: 1em auto 0 auto;
-      border-radius: 0.2em;
+      border-radius: 0.5em;
       border:none;
     cursor: pointer;
     }

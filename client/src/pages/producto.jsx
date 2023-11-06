@@ -4,11 +4,14 @@ import { useGetDelete } from "../hooks/useGetDelete";
 import Modal from "../components/global/modal";
 import Form from "../components/global/form";
 import { Section, Table } from "../style/style";
+import { toast } from "react-toastify";
 
 const Producto = () => {
   const { item, modalRef, open, close } = useModal();
   const { res, handleGet, handleDelete } = useGetDelete("producto");
-  const [categoria, setCategoria] = useState([]);
+  const { res: marca } = useGetDelete("marca");
+  const { res: categoria } = useGetDelete("categoria");
+
 
   const formData = [
     {
@@ -31,7 +34,14 @@ const Producto = () => {
       },
     },
     {
-      name: "marca",
+      name: "marcaId",
+      displayName:"marca",
+      selectType:"number",
+      type: "select",
+      optionDisplayName: "nombre",
+      optionValue: "id",
+      default: null,
+      options: marca?.data || [],
       validations: {
         required: true,
       },
@@ -44,8 +54,14 @@ const Producto = () => {
       },
     },
     {
-      name: "categoria",
-      type: "number",
+      name: "categoriaId",
+      displayName:"categoria",
+      selectType:"number",
+      type: "select",
+      optionDisplayName: "nombre",
+      optionValue: "id",
+      default: null,
+      options: categoria?.data || [],
       validations: {
         require: true,
       },
@@ -65,25 +81,8 @@ const Producto = () => {
       },
     },
   ];
-  const fetchData = async (value) => {
-    const response=await fetch(`http://localhost:3000/categoria`,{
-      method:"GET",
-      headers:{
-        "Content-Type":"applicacion/json",
-        "accept":"applicacion/json",
-      },
-    })
-    const respuesta=await response.json();
-   setCategoria(respuesta);
-  }
-  console.log(categoria);
-  const handleCategoria = (value) => {
-    setCategoria(value);
-    fetchData(value);
-  }
-  useEffect(()=>{
-    fetchData();
-  },[])
+
+
   return (
     <Section>
       <h2>Productos</h2>
@@ -91,10 +90,11 @@ const Producto = () => {
         <label>
           Buscar <input type="text" />
         </label>
-        <button onClick={() => open()}>Exportar</button>
+       <div>
+       <button onClick={() => open()}>Exportar</button>
         <button onClick={() => open()}>Añadir</button>
+       </div>
       </article>
-{/*       <input type="text" placeholder="Agregar categoria" value={categoria} onChange={(e) => handleCategoria(e.target.value)} /> */}
       <Modal ref={modalRef}>
         <Form
           key={JSON.stringify(item)}
@@ -102,7 +102,7 @@ const Producto = () => {
           fields={formData}
           route={item ? `/producto/${item.id}` : "/producto"}
           onSuccess={(res) => {
-            alert(res.message);
+            toast.success(res.message);
             handleGet();
             close();
           }}

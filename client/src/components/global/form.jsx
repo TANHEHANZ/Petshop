@@ -13,12 +13,12 @@ const Form = ({ item = undefined, fields, route, onSuccess }) => {
   const [form, setForm] = useState(getForm());
   const [errors, setErrors] = useState({});
   const timesSendedRef = useRef(0);
-  
+
   const validate = () => {
     const newErrors = {};
     fields.forEach(field => {
-      if(field.validations) {
-        if(field.validations.required && !form[field.name].trim()) {
+      if (field.validations) {
+        if (field.validations.required && !form[field.name].trim()) {
           newErrors[field.name] = "Este campo es requerido";
         }
       }
@@ -46,7 +46,7 @@ const Form = ({ item = undefined, fields, route, onSuccess }) => {
       method: item ? "PUT" : "POST",
       body: JSON.stringify(body)
     });
-    if(res.ok) {
+    if (res.ok) {
       const resJson = await res.json();
       setForm(getForm());
       onSuccess(resJson);
@@ -54,7 +54,7 @@ const Form = ({ item = undefined, fields, route, onSuccess }) => {
   }
 
   useEffect(() => {
-    if(Object.keys(errors).length === 0 && timesSendedRef.current !== 0) {
+    if (Object.keys(errors).length === 0 && timesSendedRef.current !== 0) {
       submit();
     }
   }, [errors]);
@@ -64,32 +64,32 @@ const Form = ({ item = undefined, fields, route, onSuccess }) => {
       {
         fields.map((field, i) => (
           field.type === "select" ?
-          <InputContainer key={i}>
-            <label>{field.name}</label>
-            <select 
+            <InputContainer key={i}>
+              <label>{field.displayName || field.name}</label>
+              <select
+                value={form[field.name]}
+                onChange={e => setForm(old => ({ ...old, [field.name]: e.target.value }))}
+              >
+                {
+                  field.default === null &&
+                  <option value="">Seleccione un {field.displayName || field.name}</option>
+                }
+                {
+                  field.options.map((option, j) => (
+                    <option key={j} value={option[field.optionValue]}>{option[field.optionDisplayName]}</option>
+                  ))
+                }
+              </select>
+              {errors[field.name] && <b>{errors[field.name]}</b>}
+            </InputContainer> :
+            <Input
+              key={i}
+              name={field.name}
               value={form[field.name]}
-              onChange={e => setForm(old => ({...old, [field.name]: e.target.value }))}
-            >
-              {
-                field.default === null &&
-                <option value="">Seleccione un {field.name}</option>
-              }
-              {
-                field.options.map((option, j) => (
-                  <option key={j} value={option[field.optionValue]}>{option[field.optionDisplayName]}</option>
-                ))
-              }
-            </select>
-            {errors[field.name] && <b>{errors[field.name]}</b>}
-          </InputContainer> :
-          <Input
-            key={i}
-            name={field.name}
-            value={form[field.name]}
-            onChange={e => setForm(old => ({...old, [field.name]: e.target.value }))}
-            type={field.type}
-            error={errors[field.name]}
-          />
+              onChange={e => setForm(old => ({ ...old, [field.name]: e.target.value }))}
+              type={field.type}
+              error={errors[field.name]}
+            />
         ))
       }
       <button>Enviar</button>
