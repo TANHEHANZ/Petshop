@@ -7,7 +7,12 @@ app.get("/venta", async (req, res) => {
   try {
     const venta = await prisma.venta.findMany({
       include:{
-        cliente:true
+        cliente:true,
+        DetalleVenta: {
+          include: {
+            producto: true
+          }
+        }
       }
     });
     res.json({
