@@ -34,7 +34,9 @@ export const Navbar = styled.nav`
     width: 250px;
     background-color: #1877F2;
     height: 100vh;
-    ${FlexComun}
+    display: flex;
+    justify-content: start;
+    align-items: center;
     flex-direction:column;
     align-items: start;
     padding-left: 2em;
@@ -56,6 +58,7 @@ export const Navbar = styled.nav`
   & li {
     list-style: none;
     position: relative;
+   
 
     /* &::after {
       ${PositcionComun}
