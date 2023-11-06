@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import FormatDate from "../components/global/formatDate";
 const Venta = () => {
   const { open, close, modalRef } = useModal();
+  const { item, open: openDetalle, modalRef: modalDetalleRef } = useModal();
   const { res: venta } = useGetDelete("venta");
   const { res: clienteRes } = useGetDelete("cliente");
   const { res: productoRes } = useGetDelete("producto");
@@ -45,7 +46,8 @@ const Venta = () => {
             [...old.productos, {
               id: prod.id,
               nombre: prod.nombre,
-              cantidad: cant
+              cantidad: cant,
+              precio: prod.precio
             }]
       }
     });
@@ -89,7 +91,11 @@ const Venta = () => {
     }
   }
 
- 
+  let total = form.productos.length === 0 ? "N/A" : form.productos.reduce((suma, producto) => {
+    suma += producto.precio * producto.cantidad;
+    return suma;
+  }, 0) + "Bs.";
+
   return (
     <Section>
       <h2>Venta</h2>
@@ -98,6 +104,32 @@ const Venta = () => {
         <button onClick={() => { }}>Exportar</button>
         <button onClick={() => open()}>Añadir</button>
       </article>
+      <Modal ref={modalDetalleRef}>
+        <Table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Precio de venta</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              item?.DetalleVenta.map((detalle, i) => (
+                <tr key={i}>
+                  <td>{i + 1}</td>
+                  <td>{detalle.producto.nombre}</td>
+                  <td>{detalle.cantidad}</td>
+                  <td>{detalle.precio}</td>
+                  <td>{detalle.precio * detalle.cantidad}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </Table>
+      </Modal>
       <Modal ref={modalRef}>
         <Separator>
           <form>
@@ -146,7 +178,7 @@ const Venta = () => {
                   .filter(producto => producto.nombre.toLocaleLowerCase().includes(filter.toLocaleLowerCase()))
                   .map(producto => ({
                     value: JSON.stringify(producto),
-                    text: producto.nombre + ` (${producto.cantidad} ${producto.unidadmedida})`
+                    text: producto.nombre + ` (${producto.cantidad} disponible) (${producto.precio} Bs. c/u)`
                   })
                   )}
               nodefault
@@ -157,7 +189,10 @@ const Venta = () => {
               onChange={e => setCantidad(e.target.value)}
               type="number"
             />
+            <div />
             <button onClick={addProduct}>Añadir producto</button>
+            <div />
+            <p>Total: {total}</p>
             <Table>
               <thead>
                 <tr>
@@ -194,8 +229,10 @@ const Venta = () => {
               <th>Fecha Registro</th>
               <th>Cliente</th>
               <th>Tipo de pago</th>
-              <th>total</th>
-          
+              <th>Precio</th>
+              <th>Descuento</th>
+              <th>Total</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -206,8 +243,10 @@ const Venta = () => {
                   <td><FormatDate fecha={venta.fecha}/></td>
                   <td className='grande'>{venta.cliente.nombre}</td>
                   <td>{venta.tipoPago}</td>
+                  <td>{venta.total + venta.descuento} Bs</td>
+                  <td>{venta.descuento} Bs</td>
                   <td>{venta.total} Bs</td>
-                  <td><button>Ver detalle</button></td>
+                  <td><button onClick={() => openDetalle(venta)}>Ver detalle</button></td>
                 </tr>
               ))
             }
