@@ -50,7 +50,7 @@ const Nav = () => {
         <li className="slide-in-icon">
           <Link onClick={handlerLogout} to={"/"}>
             <FontAwesomeIcon icon={faDoorClosed} />
-            Logout
+            Salir
           </Link>
         </li>
 

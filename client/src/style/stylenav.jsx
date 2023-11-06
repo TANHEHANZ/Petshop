@@ -48,7 +48,8 @@ export const Navbar = styled.nav`
     h1{
       text-align: center;
       width: 85%;
-      margin-bottom: 130px;
+      margin-top: 40px;
+      margin-bottom: 80px;
     color: #fff;
     font-size: 35px;
     border-bottom: 5px solid #fff;

@@ -107,15 +107,16 @@ export const Section = styled.section`
   }
   & > h2 {
     font-size: 2em;
-    margin: 2em;
+    margin:0 2em;
+    margin-top: 40px;
   }
   & > article {
     ${FlexComun}
     justify-content:space-between;
     gap: 1em;
-    box-shadow: 0px 5px 10px -5px #000;
+  border-bottom: 1px solid rgba(0,0,0,0.3);
     margin: 0;
-    padding: 2em 10em;
+    padding: 0em 10em 2em;
     & > div {
       ${FlexComun}
       gap:2em;
