@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Section, Table } from '../style/style'
 import { useModal } from '../hooks/useModal';
 import { useGetDelete } from '../hooks/useGetDelete';
 import Form from '../components/global/form';
 import Modal from '../components/global/modal';
 import { toast } from 'react-toastify';
+import { filterBy } from '../utilities/filterBy';
 
 const Marca = () => {
     const { item, modalRef, open, close } = useModal();
     const { res, handleGet, handleDelete } = useGetDelete("marca");
+    const [filter, setFilter] = useState("");
 
     const formData = [
         {
@@ -23,7 +25,7 @@ const Marca = () => {
         <h2>Marca</h2>
         <article>
           <label>
-            Buscar <input type="text" />
+            Buscar por nombre <input value={filter} onChange={e => setFilter(e.target.value)} type="text" />
           </label>     
           <button onClick={() => open()}>Añadir</button>
         </article>
@@ -50,7 +52,7 @@ const Marca = () => {
             </tr>
           </thead>
           <tbody>
-            {res?.data.map((marca) => (
+            {res?.data.filter(marca => filterBy(marca.nombre, filter)).map((marca) => (
               <tr key={marca.id}>
                 <td className="pequeño">{marca.id}</td>
                 <td className="grande">{marca.nombre}</td>

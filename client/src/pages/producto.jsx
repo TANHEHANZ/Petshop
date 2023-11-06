@@ -5,12 +5,14 @@ import Modal from "../components/global/modal";
 import Form from "../components/global/form";
 import { Section, Table } from "../style/style";
 import { toast } from "react-toastify";
+import { filterBy } from "../utilities/filterBy";
 
 const Producto = () => {
   const { item, modalRef, open, close } = useModal();
   const { res, handleGet, handleDelete } = useGetDelete("producto");
   const { res: marca } = useGetDelete("marca");
   const { res: categoria } = useGetDelete("categoria");
+  const [filter, setFilter] = useState("");
 
 
   const formData = [
@@ -88,7 +90,7 @@ const Producto = () => {
       <h2>Productos</h2>
       <article>
         <label>
-          Buscar <input type="text" />
+          Buscar por nombre <input value={filter} onChange={e => setFilter(e.target.value)} type="text" />
         </label>
        <div>
        <button onClick={() => open()}>Exportar</button>
@@ -122,7 +124,7 @@ const Producto = () => {
             </tr>
           </thead>
           <tbody>
-            {res?.data.map((producto) => (
+            {res?.data.filter(producto => filterBy(producto.nombre, filter)).map((producto) => (
               <tr key={producto.id}>
                 <td className="pequeño">{producto.id}</td>
                 <td className="grande">{producto.nombre}</td>

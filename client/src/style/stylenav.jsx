@@ -6,8 +6,10 @@ export const Navbar = styled.nav`
   width: 100vw;
   justify-content: start;
   z-index: 10;
-  & a:active {
-    color: ${colors.primary};
+
+  & a.active {
+    background-color: white;
+    color: #3068d9;
   }
   & a {
     text-decoration: none;
@@ -16,6 +18,8 @@ export const Navbar = styled.nav`
     color: ${colors.white};
     width: 200px;
     font-size: 0.9em;
+    border-radius: 12px;
+    transition: all 0.2s;
   }
   & svg {
     margin: 0 1em;

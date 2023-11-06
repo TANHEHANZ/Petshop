@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Section, Table } from "../style/style";
 import Modal from "../components/global/modal";
 import Form from "../components/global/form";
@@ -8,10 +8,12 @@ import { dataproveedores } from "../data/proveedores";
 import { useModal } from "../hooks/useModal";
 import { useGetDelete } from "../hooks/useGetDelete";
 import { toast } from "react-toastify";
+import { filterBy } from "../utilities/filterBy";
 
 const Proveedor = () => {
   const { item, modalRef, open, close } = useModal();
   const { res, handleGet, handleDelete } = useGetDelete("proveedor");
+  const [filter, setFilter] = useState("");
   const formData = [
     {
       name: "razonSocial",
@@ -56,7 +58,7 @@ const Proveedor = () => {
       <h2>Proveedor</h2>
       <article>
         <label>
-          Buscar <input type="text" />
+          Buscar por razón social <input value={filter} onChange={e => setFilter(e.target.value)} type="text" />
         </label>
         <button onClick={() => open()}>Añadir</button>
       </article>
@@ -88,7 +90,7 @@ const Proveedor = () => {
             </tr>
           </thead>
           <tbody>
-            {res?.data.map((proveedores) => (
+            {res?.data.filter(proveedor => filterBy(proveedor.razonSocial, filter)).map((proveedores) => (
               <tr key={proveedores.id}>
                 <td className="pequeño">{proveedores.id}</td>
                 <td className="pequeño">{proveedores.razonSocial}</td>
