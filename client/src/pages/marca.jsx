@@ -54,9 +54,9 @@ const Marca = () => {
             </tr>
           </thead>
           <tbody>
-            {res?.data.filter(marca => filterBy(marca.nombre, filter)).map((marca) => (
+            {res?.data.filter(marca => filterBy(marca.nombre, filter)).map((marca,i) => (
               <tr key={marca.id}>
-                <td className="pequeño">{marca.id}</td>
+                <td className="pequeño">{i+1}</td>
                 <td className="grande">{marca.nombre}</td>
                 <td>
                   <button onClick={() => open(marca)}><FontAwesomeIcon icon={faPencil}/></button>

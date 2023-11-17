@@ -84,6 +84,13 @@ const Producto = () => {
         required: true,
       },
     },
+    {
+      name: "fechaVencimiento",
+      type: "date",
+      validations: {
+        require: true,
+      }
+    }
   ];
 
 
@@ -95,7 +102,6 @@ const Producto = () => {
           <p>Buscar por nombre</p> <input value={filter} onChange={e => setFilter(e.target.value)} type="text" />
         </label>
         <div>
-          <button onClick={() => open()}>Exportar</button>
           <button onClick={() => open()}>Añadir</button>
         </div>
       </article>
@@ -122,18 +128,20 @@ const Producto = () => {
               <th>precio</th>
               <th>precioCompra</th>
               <th>precioCantidad</th>
+              <th>Fecha de vencimiento</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
-            {res?.data.filter(producto => filterBy(producto.nombre, filter)).map((producto) => (
-              <tr key={producto.id}>
-                <td className="pequeño">{producto.id}</td>
+            {res?.data.filter(producto => filterBy(producto.nombre, filter)).map((producto, i) => (
+              <tr key={i}>
+                <td className="pequeño">{i + 1}</td>
                 <td className="grande">{producto.nombre}</td>
                 <td className="grande">{producto.descripcion}</td>
                 <td>{producto.precio}</td>
                 <td>{producto.precioCompra}</td>
                 <td>{producto.cantidad}</td>
+                <td>{producto.fechaVencimiento}</td>
                 <td>
                   <button onClick={() => open(producto)}>
                     <FontAwesomeIcon icon={faPencil} />

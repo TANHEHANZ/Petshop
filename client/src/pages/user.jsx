@@ -34,6 +34,22 @@ const User = () => {
     },
   ];
 
+  const handlEstado = async (e, id) => {
+    const estado = await fetch(`https://petshop-backend-coral.vercel.app/usuario/${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+        "accept": "application/json"
+      },body:JSON.stringify({
+        estado:e.target.checked
+      })
+      
+    })
+    if(estado.ok){
+      toast.success("Estado cambiado");
+    }
+    console.log(e.target.checked);
+  }
   return (
     <Section>
       <h2>Usuarios</h2>
@@ -69,20 +85,20 @@ const User = () => {
             </tr>
           </thead>
           <tbody>
-            {res?.data.filter(usuario => filterBy(usuario.nombre, filter)).map((usuario,i) => (
+            {res?.data.filter(usuario => filterBy(usuario.nombre, filter)).map((usuario, i) => (
               <tr key={usuario.id}>
-                <td className="pequeño">{i+1}</td>
+                <td className="pequeño">{i + 1}</td>
                 <td className="grande">{usuario.nombre}</td>
                 <td className="grande">{usuario.correo}</td>
-                <td>{usuario.password}</td>
+                <td>********</td>
                 <td>
-                  <input type="checkbox" />
+                  <input type="checkbox" defaultChecked={usuario.estado} onChange={(e) => handlEstado(e, usuario.id)} />
                 </td>
                 <td>
                   <button onClick={() => open(usuario)}>
-                    <FontAwesomeIcon icon={faPencil}/>
+                    <FontAwesomeIcon icon={faPencil} />
                   </button>
-                  <button onClick={() => handleDelete(usuario.id)} style={{color:"#1877F2"}}>
+                  <button onClick={() => handleDelete(usuario.id)} style={{ color: "#1877F2" }}>
                     <FontAwesomeIcon icon={faTrash} />
                   </button>
                 </td>

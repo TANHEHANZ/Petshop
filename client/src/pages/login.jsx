@@ -11,7 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const postLogin = async (e) => {
     e.preventDefault();
-    const login = await fetch(`http://localhost:3000/login`, {
+    const login = await fetch(`https://petshop-backend-coral.vercel.app/login`, {
       method: "POST",
       headers: {
         "accept": "application/json",

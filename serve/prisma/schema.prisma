@@ -40,19 +40,20 @@ model Marca {
 }
 
 model Producto {
-  id             Int             @id @default(autoincrement())
-  nombre         String
-  descripcion    String
-  categoriaId    Int
-  marcaId        Int
-  cantidad       Int
-  precio         Float
-  unidadmedida   String
-  precioCompra   Float
-  marca          Marca           @relation(fields: [marcaId], references: [id])
-  categoria      Categoria       @relation(fields: [categoriaId], references: [id])
-  DetalleVenta   DetalleVenta[]
-  DetallecCompra DetalleCompra[]
+  id               Int             @id @default(autoincrement())
+  nombre           String
+  descripcion      String
+  categoriaId      Int
+  marcaId          Int
+  cantidad         Int
+  precio           Float
+  unidadmedida     String
+  precioCompra     Float
+  fechaVencimiento String
+  marca            Marca           @relation(fields: [marcaId], references: [id])
+  categoria        Categoria       @relation(fields: [categoriaId], references: [id])
+  DetalleVenta     DetalleVenta[]
+  DetallecCompra   DetalleCompra[]
 }
 
 model Venta {
@@ -61,6 +62,7 @@ model Venta {
   descuento             Float
   inpuestoGeneradoVenta Float?
   clienteId             Int
+  motivo                String
   fecha                 DateTime       @default(now())
   total                 Float
   cliente               Cliente        @relation(fields: [clienteId], references: [ci])

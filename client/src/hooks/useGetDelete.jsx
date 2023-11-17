@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-const backendUrl = "http://localhost:3000/";
+const backendUrl = "https://petshop-backend-coral.vercel.app/";
 
 export const useGetDelete = (route) => {
   const [res, setRes] = useState();

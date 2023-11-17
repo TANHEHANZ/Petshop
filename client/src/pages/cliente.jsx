@@ -63,12 +63,7 @@ const Cliente = () => {
           <p>Buscar por nombre y apellido</p> <input value={filter} onChange={e => setFilter(e.target.value)} type="text" />
         </label>
         <div>
-          <button onClick={() => open()}>
-            <FontAwesomeIcon
-              icon={faExternalLinkSquareAlt}
-              style={{ color: "#fff" }}
-            />
-          </button>
+          
           <button onClick={() => open()}>
             <FontAwesomeIcon icon={faPlus} style={{ color: "#fff" }} />
           </button>
@@ -100,8 +95,8 @@ const Cliente = () => {
             </tr>
           </thead>
           <tbody>
-            {res?.data.filter(cliente => filterBy(cliente.nombre + " " + cliente.apellido, filter)).map((cliente) => (
-              <tr key={cliente.id}>
+            {res?.data.filter(cliente => filterBy(cliente.nombre + " " + cliente.apellido, filter)).map((cliente,i) => (
+              <tr key={i}>
                 <td className="pequeño">{cliente.ci}</td>
                 <td className="grande">{cliente.nombre}</td>
                 <td className="grande">{cliente.apellido}</td>

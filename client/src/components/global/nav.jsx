@@ -20,12 +20,12 @@ const linksData = [
   
   { to: "/dashboard/venta", label: "Venta", icon: faDollarSign },
   { to: "/dashboard/cliente", label: "Cliente", icon: faUsers },
-  { to: "/dashboard/proveedor", label: "Proveedor", icon: faBuilding },
+  { to: "/dashboard/proveedor", label: "Proveedor", icon: faBuilding,admin: true },
   { to: "/dashboard/compra", label: "Compra", icon: faShoppingBag },
-  { to: "/dashboard/producto", label: "Producto", icon: faShoppingCart },
-  { to: "/dashboard/categoria", label: "Categoria", icon: faBox },
-  { to: "/dashboard/marca", label: "Marca", icon: faLock },
-  { to: "/dashboard/usuario", label: "Usuario", icon: faUser }
+  { to: "/dashboard/producto", label: "Producto", icon: faShoppingCart,admin: true },
+  { to: "/dashboard/categoria", label: "Categoria", icon: faBox,admin: true },
+  { to: "/dashboard/marca", label: "Marca", icon: faLock,admin: true },
+  { to: "/dashboard/usuario", label: "Usuario", icon: faUser,admin: true }
 ];
 const Nav = () => {
   const { setUser, user, logout } = useUser();
@@ -41,12 +41,13 @@ const Nav = () => {
     <Navbar>
       <ul className="nav">
       <h1>Petshop</h1>
-        {linksData.map((link, index) => (
-          <li key={index} className="slide-in-icon">
-            <NavLink to={link.to}>
-              <FontAwesomeIcon icon={link.icon} /> {link.label}
-            </NavLink>
-          </li>
+      {linksData.map((link, index) => (
+            (!link.admin || user.correo === "sarabiabrayam72@gmail.com") &&
+            <li key={index} className="slide-in-icon">
+              <NavLink to={link.to}>
+                <FontAwesomeIcon icon={link.icon} /> {link.label}
+              </NavLink>
+            </li>
         ))}
         <li className="slide-in-icon" >
           <Link onClick={handlerLogout} to={"/"}>

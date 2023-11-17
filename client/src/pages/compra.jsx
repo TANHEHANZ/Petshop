@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Section, Table } from "../style/style";
 import FilterVentas from "../components/filterVentas";
 import { useModal } from "../hooks/useModal";
@@ -28,9 +28,17 @@ const Compra = () => {
     proveedor: "",
     productos: []
   });
-
+  const [errorProducto,setErrorProducto]=useState("");
+  const [error,setError]=useState({
+    recibe:true
+  });
   const addProduct = (e) => {
     e.preventDefault();
+    if(!productoSeleccionado){
+      setErrorProducto("Seleccione producto");
+      return
+    }
+    setErrorProducto("");
     setForm(old => {
       const prod = JSON.parse(productoSeleccionado);
       const cant = Number(cantidad);
@@ -41,7 +49,7 @@ const Compra = () => {
           productoExistente ?
             old.productos.map(producto => {
               if (producto.id === prod.id) {
-                producto.cantidad += (cant/2);
+                producto.cantidad += (cant/2);// tu eres el error cuando se agrega 1 sale error
               }
               return producto;
             })
@@ -67,13 +75,13 @@ const Compra = () => {
     }))
   }
 
-  const handleSend = async (e) => {
-    e.preventDefault();
+  const handleSend = async () => {
+   
     const body = JSON.stringify({
       proveedor: Number(form.proveedor),
       productos: form.productos
     })
-    const res = await fetch(`http://localhost:3000/comprar`, {
+    const res = await fetch(`https://petshop-backend-coral.vercel.app/comprar`, {
       method: "POST",
       headers: {
         "Accept": "application/json",
@@ -96,12 +104,26 @@ const Compra = () => {
       }
     }
   }
-
+  useEffect(() => {
+    if (Object.keys(error).length == 0) {
+      handleSend();
+    }
+  }, [error]);
   let total = form.productos.length === 0 ? "N/A" : form.productos.reduce((suma, producto) => {
     suma += producto.precio * producto.cantidad;
     return suma;
   }, 0) + "Bs.";
-
+  const handleVaidation = (e) => {
+    e.preventDefault();
+    const newerror = {}
+    if (form.proveedor == "") {
+      newerror.proveedor = "Seleccione un proveedor";
+    }
+    if (form.productos.length == 0) {
+      newerror.productos = "Seleccione al menos un producto"
+    }
+    setError(newerror);
+  }
   return (
     <Section>
       <h2>Compra</h2>
@@ -147,6 +169,7 @@ const Compra = () => {
                 text: proveedor.razonSocial
               }))}
               nodefault
+              error={error.proveedor}
             />
             <div />
             <div />
@@ -168,6 +191,7 @@ const Compra = () => {
                   })
                   )}
               nodefault
+              error={errorProducto}
             />
             <Input
               name="Cantidad"
@@ -203,7 +227,7 @@ const Compra = () => {
                 }
               </tbody>
             </Table>
-            <button onClick={handleSend}>Enviar</button>
+            <button onClick={handleVaidation}>Comprar</button>
           </form>
         </Separator>
       </Modal>

@@ -23,11 +23,12 @@ const Venta = () => {
   const [productoSeleccionado, setProductoSeleccionado] = useState("");
   const [cantidad, setCantidad] = useState("1");
   const [filterInput, setFilterInput] = useState("");
-
+const [errorProducto,setErrorproducto]=useState("")
   const [form, setForm] = useState({
     cliente: "",
     descuento: "",
-    tipoPago: "",
+    tipoPago: "efectivo",
+    motivo:"",
     productos: []
   });
   const [error, setError] = useState({
@@ -36,6 +37,11 @@ const Venta = () => {
 
   const addProduct = (e) => {
     e.preventDefault();
+    if(!productoSeleccionado){
+      setErrorproducto("Seleccione producto");
+      return
+    }
+    setErrorproducto("");
     setForm(old => {
       const prod = JSON.parse(productoSeleccionado);
       const cant = Number(cantidad);
@@ -46,7 +52,7 @@ const Venta = () => {
           productoExistente ?
             old.productos.map(producto => {
               if (producto.id === prod.id) {
-                producto.cantidad += (cant / 2);
+                producto.cantidad += (cant);
               }
               return producto;
             })
@@ -59,10 +65,13 @@ const Venta = () => {
             }]
       }
     });
+    
     setFilter("");
     setProductoSeleccionado("");
     setCantidad("1");
+
   }
+
 
   const removeProducto = (e, id) => {
     e.preventDefault();
@@ -77,23 +86,25 @@ const Venta = () => {
     if (form.cliente == "") {
       newerror.cliente = "Seleccione un cliente";
     }
+    if (form.productos.length == 0) {
+      newerror.productos = "Seleccione al menos un producto"
+    }
     setError(newerror);
-
   }
   useEffect(() => {
     if (Object.keys(error).length == 0) {
       handleSend();
     }
   }, [error]);
-  const handleSend = async (e) => {
-    e.preventDefault();
+  const handleSend = async () => {
     const body = JSON.stringify({
       cliente: Number(form.cliente),
       tipoPago: form.tipoPago,
       descuento: Number(form.descuento),
+      motivo:form.motivo,
       productos: form.productos
     })
-    const res = await fetch(`http://localhost:3000/vender`, {
+    const res = await fetch(`https://petshop-backend-coral.vercel.app/vender`, {
       method: "POST",
       headers: {
         "Accept": "application/json",
@@ -112,6 +123,7 @@ const Venta = () => {
           cliente: "",
           descuento: "",
           tipoPago: "",
+          motivo:"",
           productos: []
         });
         close();
@@ -159,41 +171,41 @@ const Venta = () => {
       </Modal>
       <Modal ref={modalRef}>
         <Separator>
-          <form>              
-                <Input
-                  name="Nro Carnet"
-                  value={filterCliente}
-                  onChange={(e)=>setFiltercliente(e.target.value)}
-                  type="number"
-                />
-                <Select
-                  name="Cliente"
-                  value={form.cliente}
-                  onChange={e => setForm(old => ({ ...old, cliente: e.target.value }))}
-                  options={clienteRes?.data.filter(
-                    cliente=>filterBy(String(cliente.ci),filterCliente)
-                  ).map(cliente => ({
-                    value: cliente.ci,
-                    text: cliente.nombre + cliente.apellido,
-                  }))}
-                  nodefault
-                  error={error.cliente}
-                />
-             <Select
-                  name="Tipo de pago"
-                  value={form.tipoPago}
-                  onChange={e => setForm(old => ({ ...old, tipoPago: e.target.value }))}
-                  options={[{
-                    value: "efectivo",
-                    text: "Efectivo"
-                  }, {
-                    value: "qr",
-                    text: "QR"
-                  }, {
-                    value: "tarjeta",
-                    text: "Tarjeta"
-                  }]}
-                />
+          <form>
+            <Input
+              name="Nro Carnet"
+              value={filterCliente}
+              onChange={(e) => setFiltercliente(e.target.value)}
+              type="number"
+            />
+            <Select
+              name="Cliente"
+              value={form.cliente}
+              onChange={e => setForm(old => ({ ...old, cliente: e.target.value }))}
+              options={clienteRes?.data.filter(
+                cliente => filterBy(String(cliente.ci), filterCliente)
+              ).map(cliente => ({
+                value: cliente.ci,
+                text: cliente.nombre + cliente.apellido,
+              }))}
+              nodefault
+              error={error.cliente}
+            />
+            <Select
+              name="Tipo de pago"
+              value={form.tipoPago}
+              onChange={e => setForm(old => ({ ...old, tipoPago: e.target.value }))}
+              options={[{
+                value: "efectivo",
+                text: "Efectivo"
+              }, {
+                value: "qr",
+                text: "QR"
+              }, {
+                value: "tarjeta",
+                text: "Tarjeta"
+              }]}
+            />
             <Input
               name="Busqueda"
               value={filter}
@@ -208,28 +220,36 @@ const Venta = () => {
                   .filter(producto => producto.nombre.toLocaleLowerCase().includes(filter.toLocaleLowerCase()))
                   .map(producto => ({
                     value: JSON.stringify(producto),
-                    text: producto.nombre + ` (${producto.cantidad} disponible) (${producto.precio} Bs. c/u)`
+                    text: producto.nombre + ` (${producto.cantidad} ${producto.unidadmedida} disponible) (${producto.precio} Bs. c/u)`
                   })
                   )}
               nodefault
-            />   
+              error={errorProducto}
+            />
+
             <Input
               name="Cantidad"
               value={cantidad}
               onChange={e => setCantidad(e.target.value)}
               type="number"
             />
-               <button onClick={addProduct}>Añadir producto</button>
-                <Input
-                  name="Descuento"
-                  value={form.descuento}
-                  onChange={e => setForm(old => ({ ...old, descuento: e.target.value }))}
-                  type="number"
-                />
-                <p>Total: {total}</p>
-             <button onClick={handleVaidation}>Vender</button>
+            <Input
+              name="Descuento"
+              value={form.descuento}
+              onChange={e => setForm(old => ({ ...old, descuento: e.target.value }))}
+              type="number"
+            />
+            <Input
+              name="Motivo del descuento"
+              value={form.motivo}
+              onChange={e => setForm(old => ({ ...old, motivo: e.target.value }))}
+              type="text"
+            />
+            <button onClick={addProduct}>Añadir Producto</button>
+            <p>Total: {total}</p>
             <div />
             <div />
+
             <Table>
               <thead>
                 <tr>
@@ -254,7 +274,7 @@ const Venta = () => {
                 }
               </tbody>
             </Table>
-
+            <button onClick={handleVaidation}>Vender</button>
           </form>
         </Separator>
       </Modal>
@@ -268,20 +288,22 @@ const Venta = () => {
               <th>Tipo de pago</th>
               <th>Precio</th>
               <th>Descuento</th>
+              <th>Motivo de descuento</th>
               <th>Total</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
             {
-              venta?.data.filter(detalle => filterBy(formatDate(detalle.fecha), filterInput)).map(venta => (
+              venta?.data.filter(detalle => filterBy(formatDate(detalle.fecha), filterInput)).map((venta, i) => (
                 <tr key={venta.id}>
-                  <td>{venta.id}</td>
+                  <td>{i + 1}</td>
                   <td><FormatDate fecha={venta.fecha} /></td>
                   <td className='grande'>{venta.cliente.nombre}</td>
                   <td>{venta.tipoPago}</td>
                   <td>{venta.total + venta.descuento} Bs</td>
                   <td>{venta.descuento} Bs</td>
+                  <td>{venta.motivo}</td>
                   <td>{venta.total} Bs</td>
                   <td ><button onClick={() => openDetalle(venta)}>
                     <FontAwesomeIcon
@@ -305,8 +327,11 @@ const Separator = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  & p{
+    width: 100%;
+  }
 `;
-const Divcliente=styled.div`
+const Divcliente = styled.div`
   width: 30vw;
   height: 10vh;
 `;

@@ -38,7 +38,7 @@ const Form = ({ item = undefined, fields, route, onSuccess }) => {
       body[field.name] = (field.type === "number" || field.selectType === "number") ? Number(form[field.name]) : form[field.name]
     });
     console.log(body);
-    const res = await fetch(`http://localhost:3000${route}`, {
+    const res = await fetch(`https://petshop-backend-coral.vercel.app${route}`, {
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"

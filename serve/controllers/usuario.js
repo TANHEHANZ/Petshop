@@ -96,19 +96,20 @@ app.post("/login", async (req, res) => {
     where: {
       correo: correo,
       password: password,
+      estado:true
     },
   });
-  if(!login){
-   res.json({
-    message:"Usuario no autorizado",
-    error:"Usuario no autorizado"
-   })
-   return
+  if (!login) {
+    res.json({
+      message: "Usuario no autorizado",
+      error: "Usuario no autorizado",
+    });
+    return;
   }
- login.password=undefined;
+  login.password = undefined;
   res.json({
-    message:"Inicio de sesion correcto",
-    data:login
-  })
+    message: "Inicio de sesion correcto",
+    data: login,
+  });
 });
 export default app;

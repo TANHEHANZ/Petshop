@@ -29,10 +29,8 @@ const Proveedor = () => {
       },
     },
     {
-      name: "gmail",
-      validations: {
-        required: true
-      },
+      name: "gmail"
+     
     }, {
       name: "representante",
       validations: {
@@ -46,10 +44,7 @@ const Proveedor = () => {
       }
     },
     {
-      name: "direccion",
-      validations: {
-        required: true
-      }
+      name: "direccion"
     }
 
   ]
@@ -101,17 +96,13 @@ const Proveedor = () => {
                 <td className="pequeño">{proveedores.ciudad}</td>
                 <td>
                   <button onClick={() => open(proveedores)}>
-            
                     <FontAwesomeIcon
                       icon={faPencil}
-                     
                     />
                   </button>
-                  <button onClick={() => handleDelete(proveedores.ci)}>
-      
+                  <button onClick={() => handleDelete(proveedores.id)}>
                     <FontAwesomeIcon
                       icon={faTrash}
-                
                       style={{ color: "#1877F2" }}
                     />
                   </button>

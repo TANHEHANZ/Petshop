@@ -53,9 +53,9 @@ const Categoria = () => {
             </tr>
           </thead>
           <tbody>
-            {res?.data.filter(categoria => filterBy(categoria.nombre, filter)).map((categoria) => (
+            {res?.data.filter(categoria => filterBy(categoria.nombre, filter)).map((categoria,i) => (
               <tr key={categoria.id}>
-                <td className="pequeño">{categoria.id}</td>
+              <td className="pequeño">{i+1}</td>
                 <td className="grande">{categoria.nombre}</td>
                 <td>
                   <button onClick={() => open(categoria)}><FontAwesomeIcon icon={faPencil}/></button>

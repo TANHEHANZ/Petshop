@@ -22,6 +22,7 @@ app.post("/producto", async (req, res) => {
   try {
     const producto = await prisma.producto.create({
       data: req.body,
+      
     });
     res.json({
       data: producto,

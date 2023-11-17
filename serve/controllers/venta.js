@@ -6,14 +6,14 @@ const prisma = new PrismaClient();
 app.get("/venta", async (req, res) => {
   try {
     const venta = await prisma.venta.findMany({
-      include:{
-        cliente:true,
+      include: {
+        cliente: true,
         DetalleVenta: {
           include: {
-            producto: true
-          }
-        }
-      }
+            producto: true,
+          },
+        },
+      },
     });
     res.json({
       data: venta,
@@ -85,25 +85,32 @@ app.post("/vender", async (req, res) => {
     const productos = await prisma.producto.findMany({
       where: {
         id: {
-          in: req.body.productos.map(producto => producto.id)
-        }
-      }
+          in: req.body.productos.map((producto) => producto.id),
+        },
+      },
     });
     //VALIDAR
     let flag = false;
-    req.body.productos.forEach(producto => {
-      const productoExistente = productos.find(prod => prod.id === producto.id);
-      if(producto.cantidad > productoExistente.cantidad) {
+    req.body.productos.forEach((producto) => {
+      const productoExistente = productos.find(
+        (prod) => prod.id === producto.id
+      );
+      if (producto.cantidad > productoExistente.cantidad) {
         flag = true;
         res.json({
           message: "Error",
-          error: "la cantidad de " + productoExistente.nombre + " no puede ser mayor a la existente"
-        })
+          error:
+            "la cantidad de " +
+            productoExistente.nombre +
+            " no puede ser mayor a la existente",
+        });
       }
     });
-    if(flag) return;
+    if (flag) return;
     const total = productos.reduce((suma, producto) => {
-      const productoVendido = req.body.productos.find(prod => prod.id === producto.id);
+      const productoVendido = req.body.productos.find(
+        (prod) => prod.id === producto.id
+      );
       const totalProducto = producto.precio * productoVendido.cantidad;
       suma += totalProducto;
       return suma;
@@ -112,40 +119,41 @@ app.post("/vender", async (req, res) => {
       data: {
         clienteId: req.body.cliente,
         tipoPago: req.body.tipoPago,
+        motivo: req.body.motivo,
         descuento: req.body.descuento || 0,
         total: total - req.body.descuento,
         DetalleVenta: {
           createMany: {
-            data: req.body.productos.map(producto => ({
+            data: req.body.productos.map((producto) => ({
               cantidad: producto.cantidad,
-              productoId: producto.id,  
-              precio: productos.find(prod => prod.id === producto.id).precio
-            }))
-          }
-        }
-      }
+              productoId: producto.id,
+              precio: productos.find((prod) => prod.id === producto.id).precio,
+            })),
+          },
+        },
+      },
     });
-    req.body.productos.forEach(async producto => {
+    req.body.productos.forEach(async (producto) => {
       await prisma.producto.update({
         where: {
-          id: producto.id
+          id: producto.id,
         },
         data: {
           cantidad: {
-            decrement: producto.cantidad
-          }
-        }
-      })
+            decrement: producto.cantidad,
+          },
+        },
+      });
     });
     res.json({
       message: "Vendido correctamente",
-      data: venta
-    })
+      data: venta,
+    });
   } catch (e) {
     res.status(500).json({
       message: "Error",
-      error: e.message
-    })
+      error: e.message,
+    });
   }
 });
 
